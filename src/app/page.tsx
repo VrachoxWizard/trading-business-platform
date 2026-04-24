@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import ProcessTimeline from '@/components/ProcessTimeline'
 import {
   TrendingUp,
   Shield,
@@ -91,16 +92,7 @@ const features = [
   },
 ]
 
-const process = [
-  { step: '01', title: 'Free Valuation', desc: 'Get an AI-powered estimate in 5 minutes' },
-  { step: '02', title: 'Strategy Call', desc: 'Discuss goals with a dedicated broker' },
-  { step: '03', title: 'Confidential Listing', desc: 'We create your anonymous teaser' },
-  { step: '04', title: 'Buyer Matching', desc: 'AI finds qualified, pre-screened buyers' },
-  { step: '05', title: 'NDA & Due Diligence', desc: 'Secure document exchange via deal room' },
-  { step: '06', title: 'Negotiation', desc: 'Expert-guided terms and structuring' },
-  { step: '07', title: 'Closing', desc: 'Legal support through final transaction' },
-  { step: '08', title: 'Transition', desc: 'Smooth handover and post-sale support' },
-]
+
 
 const comparisons = [
   { feature: 'AI-Powered Valuation', dealflow: true, traditional: false },
@@ -305,52 +297,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PROCESS TIMELINE */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* PROCESS TIMELINE — Cinematic Vertical Canvas */}
+      <section className="py-32 bg-navy-950 overflow-hidden relative">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[10%] right-[-10%] w-[600px] h-[600px] bg-accent-500/5 rounded-full blur-3xl opacity-50" />
+          <div className="absolute bottom-[20%] left-[-10%] w-[500px] h-[500px] bg-gold-500/5 rounded-full blur-3xl opacity-50" />
+          <div className="absolute top-[50%] left-[50%] -translate-x-1/2 w-[800px] h-[800px] bg-accent-400/5 rounded-full blur-3xl opacity-30" />
+        </div>
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={stagger}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold text-navy-950 mb-4">
+            <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-bold text-white mb-6">
               Our 8-Step Process
             </motion.h2>
-            <motion.p variants={fadeIn} className="text-navy-500 text-lg max-w-2xl mx-auto">
+            <motion.p variants={fadeIn} className="text-navy-300 text-lg md:text-xl max-w-2xl mx-auto">
               From valuation to closing, we guide you through every stage of the transaction.
             </motion.p>
           </motion.div>
 
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {process.map((p, i) => (
-              <motion.div
-                key={p.step}
-                variants={fadeIn}
-                className="relative bg-navy-50 rounded-2xl p-6 border border-navy-100 hover:border-accent-200 hover:shadow-card transition-all group"
-              >
-                <span className="text-5xl font-black text-navy-100 group-hover:text-accent-200 transition-colors absolute top-4 right-4">
-                  {p.step}
-                </span>
-                <div className="relative">
-                  <div className="w-8 h-8 rounded-full gradient-accent flex items-center justify-center text-white text-xs font-bold mb-4">
-                    {i + 1}
-                  </div>
-                  <h3 className="text-lg font-bold text-navy-950 mb-2">{p.title}</h3>
-                  <p className="text-sm text-navy-500">{p.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          <ProcessTimeline />
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link
               href="/sell"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl gradient-accent text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:scale-[1.02]"
