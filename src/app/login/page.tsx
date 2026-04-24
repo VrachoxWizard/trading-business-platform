@@ -76,7 +76,7 @@ function LoginForm() {
                     </div>
 
                     <h2 className="text-2xl font-bold text-navy-950 mb-2">
-                        {mode === 'login' ? 'Welcome back' : 'Join DealFlow'}
+                        {mode === 'login' ? 'Welcome back' : 'Join Heritance'}
                     </h2>
                     <p className="text-navy-500 text-sm mb-6">
                         {mode === 'login'
@@ -191,7 +191,7 @@ function LoginForm() {
                 </div>
 
                 <p className="text-center text-sm text-navy-300 mt-6">
-                    By continuing, you agree to DealFlow&apos;s{' '}
+                    By continuing, you agree to Heritance&apos;s{' '}
                     <Link href="#" className="text-gold-400 hover:text-gold-300">Terms</Link>{' '}
                     and{' '}
                     <Link href="#" className="text-gold-400 hover:text-gold-300">Privacy Policy</Link>.

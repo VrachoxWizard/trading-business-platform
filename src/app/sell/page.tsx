@@ -35,7 +35,7 @@ const steps = [
     {
         icon: MessageSquare,
         title: '2. Strategy Consultation',
-        desc: 'A dedicated DealFlow broker discusses your goals, timeline, and optimal exit strategy.',
+        desc: 'A dedicated Heritance broker discusses your goals, timeline, and optimal exit strategy.',
         detail: 'Free 30-minute call. No obligation. Completely confidential.',
     },
     {
@@ -47,7 +47,7 @@ const steps = [
     {
         icon: Shield,
         title: '4. Confidential Listing',
-        desc: 'Your business is listed anonymously on DealFlow. No identifying information is shared.',
+        desc: 'Your business is listed anonymously on Heritance. No identifying information is shared.',
         detail: 'AI generates a blind teaser that you must approve before publishing.',
     },
     {
@@ -95,7 +95,7 @@ export default function SellPage() {
                             <span className="text-gold-400">confidence</span>
                         </motion.h1>
                         <motion.p variants={fadeIn} className="text-lg md:text-xl text-navy-200 mb-10 leading-relaxed">
-                            DealFlow combines AI-powered tools with personal brokerage to maximize your exit value while maintaining complete confidentiality.
+                            Heritance combines AI-powered tools with personal brokerage to maximize your exit value while maintaining complete confidentiality.
                         </motion.p>
                         <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
                             <Link
@@ -122,7 +122,7 @@ export default function SellPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={stagger}>
                         <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold text-navy-950 text-center mb-16">
-                            Why sell with DealFlow?
+                            Why sell with Heritance?
                         </motion.h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {benefits.map((b) => {

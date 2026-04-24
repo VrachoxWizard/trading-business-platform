@@ -1,4 +1,4 @@
-// DealFlow M&A Platform — Constants
+// Heritance M&A Platform — Constants
 
 export const INDUSTRIES = [
     'Technology & SaaS',

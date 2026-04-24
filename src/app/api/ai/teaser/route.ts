@@ -85,7 +85,7 @@ ${body.businessModel ? `<p><strong>Business Model:</strong> ${body.businessModel
 <p><strong>Indicative Asking Price:</strong> ${formatEur(Number(body.askingPrice))}</p>
 <hr style="border: 1px solid #eee;" />
 <p style="color: #666; font-size: 14px;">
-  This is a confidential blind teaser distributed by DealFlow. For more information, 
+  This is a confidential blind teaser distributed by Heritance. For more information, 
   please request NDA access through the platform.
 </p>
 </div>`
@@ -104,5 +104,5 @@ Team Size: ${body.employeeCount} employees
 Reason for Sale: ${body.reasonForSale}
 Indicative Asking Price: ${formatEur(Number(body.askingPrice))}
 
-This is a confidential blind teaser distributed by DealFlow.`
+This is a confidential blind teaser distributed by Heritance.`
 }

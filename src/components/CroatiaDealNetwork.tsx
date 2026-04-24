@@ -29,7 +29,7 @@ type City = {
 }
 
 const CITIES: City[] = [
-    { id: 'zagreb', name: 'Zagreb', region: 'Central Croatia', tags: 'Advisors, buyers, agencies', desc: 'Main DealFlow hub for verified acquisition interest.', x: 324, y: 145, connections: ['split', 'rijeka', 'osijek', 'zadar', 'varazdin', 'karlovac'] },
+    { id: 'zagreb', name: 'Zagreb', region: 'Central Croatia', tags: 'Advisors, buyers, agencies', desc: 'Main Heritance hub for verified acquisition interest.', x: 324, y: 145, connections: ['split', 'rijeka', 'osijek', 'zadar', 'varazdin', 'karlovac'] },
     { id: 'split', name: 'Split', region: 'Dalmatia', tags: 'Hospitality, tourism, family biz', desc: 'Connect local sellers with serious buyers across Croatia.', x: 388, y: 598, connections: ['zadar', 'dubrovnik', 'zagreb'] },
     { id: 'rijeka', name: 'Rijeka', region: 'Kvarner', tags: 'Logistics, trade, services', desc: 'Regional business opportunities with confidential buyer interest.', x: 110, y: 242, connections: ['pula', 'zagreb', 'zadar', 'karlovac'] },
     { id: 'osijek', name: 'Osijek', region: 'Slavonia', tags: 'Agriculture, IT, manufacturing', desc: 'Growing eastern hub for local manufacturing acquisitions.', x: 703, y: 197, connections: ['slavonskiBrod', 'zagreb'] },
@@ -100,7 +100,7 @@ export default function CroatiaDealNetwork() {
                             Croatia’s small-business deal network
                         </h2>
                         <p className="text-lg md:text-xl text-navy-300 leading-relaxed font-light">
-                            From Zagreb to Split, Rijeka, Osijek, and beyond — DealFlow helps local business owners connect with serious buyers through a private, structured process.
+                            From Zagreb to Split, Rijeka, Osijek, and beyond — Heritance helps local business owners connect with serious buyers through a private, structured process.
                         </p>
                     </motion.div>
                 </div>
@@ -117,7 +117,7 @@ export default function CroatiaDealNetwork() {
                             <svg
                                 viewBox="0 0 800 800"
                                 className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(30,41,59,0.5)]"
-                                aria-label="Interactive map of Croatian DealFlow network"
+                                aria-label="Interactive map of Croatian Heritance network"
                                 role="img"
                             >
                                 {/* Accurate Croatia Land Outline */}

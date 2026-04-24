@@ -36,7 +36,7 @@ const testimonials = [
         name: "Marko K.",
         role: "Café Owner",
         type: "Seller",
-        quote: "DealFlow helped me understand what my business was worth before speaking with buyers. The process felt private, clear, and professional.",
+        quote: "Heritance helped me understand what my business was worth before speaking with buyers. The process felt private, clear, and professional.",
         initials: "MK",
         color: "bg-blue-900"
     },

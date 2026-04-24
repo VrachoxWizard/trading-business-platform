@@ -1,18 +1,18 @@
 import Link from 'next/link'
-import { TrendingUp, Mail, MapPin, Phone } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 
 const footerLinks = {
     Platform: [
-        { label: 'Browse Deals', href: '/listings' },
+        { label: 'Marketplace', href: '/listings' },
         { label: 'Free Valuation', href: '/valuate' },
         { label: 'Sell a Business', href: '/sell' },
-        { label: 'For Investors', href: '/listings?role=buyer' },
+        { label: 'Buy a Business', href: '/buy' },
     ],
     Company: [
-        { label: 'About DealFlow', href: '#' },
-        { label: 'Our Process', href: '/sell#process' },
-        { label: 'Pricing', href: '#pricing' },
-        { label: 'Blog', href: '#' },
+        { label: 'About Heritance', href: '#' },
+        { label: 'Succession Planning', href: '/succession' },
+        { label: 'Blog', href: '/blog' },
+        { label: 'Contact', href: '/contact' },
     ],
     Legal: [
         { label: 'Privacy Policy', href: '#' },
@@ -30,25 +30,25 @@ export default function Footer() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                         <div>
-                            <h3 className="text-2xl font-bold mb-2">
-                                Ready to make a move?
+                            <h3 className="text-2xl font-display font-bold mb-2">
+                                Ready to write the next chapter?
                             </h3>
-                            <p className="text-navy-300">
-                                Whether buying or selling, DealFlow guides you through every step.
+                            <p className="text-navy-300 font-sans">
+                                Whether buying or selling, Heritance guides you through every step.
                             </p>
                         </div>
                         <div className="flex gap-3">
                             <Link
                                 href="/valuate"
-                                className="px-6 py-3 rounded-xl gradient-gold text-navy-950 font-semibold text-sm hover:shadow-xl transition-all hover:scale-[1.02]"
+                                className="px-6 py-3 rounded-lg gradient-gold text-navy-950 font-semibold text-sm hover:shadow-md transition-all hover:scale-[1.02]"
                             >
                                 Free Valuation →
                             </Link>
                             <Link
                                 href="/listings"
-                                className="px-6 py-3 rounded-xl border border-white/20 text-white font-semibold text-sm hover:bg-white/10 transition-all"
+                                className="px-6 py-3 rounded-lg border border-white/20 text-white font-semibold text-sm hover:bg-white/10 transition-all"
                             >
-                                Browse Deals
+                                Browse Listings
                             </Link>
                         </div>
                     </div>
@@ -60,28 +60,28 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
                     {/* Brand column */}
                     <div className="lg:col-span-2">
-                        <Link href="/" className="flex items-center gap-2 mb-6">
-                            <div className="w-10 h-10 rounded-xl gradient-accent flex items-center justify-center">
-                                <TrendingUp className="w-5 h-5 text-white" />
+                        <Link href="/" className="flex items-center gap-2.5 mb-6">
+                            <div className="w-9 h-9 rounded-lg bg-gold-600 flex items-center justify-center">
+                                <span className="text-white font-display font-bold text-lg leading-none">H</span>
                             </div>
-                            <span className="text-xl font-bold">
-                                Deal<span className="text-gold-500">Flow</span>
+                            <span className="text-xl font-display font-bold">
+                                Herit<span className="text-gold-400">ance</span>
                             </span>
                         </Link>
-                        <p className="text-navy-300 text-sm leading-relaxed mb-6 max-w-sm">
-                            The premier M&A advisory platform for micro and small businesses
-                            in Croatia and the wider region. AI-powered valuations,
-                            confidential deal rooms, and expert brokerage.
+                        <p className="text-navy-300 text-sm leading-relaxed mb-6 max-w-sm font-sans">
+                            Where businesses find their next chapter. AI-powered valuations,
+                            confidential deal rooms, and expert M&A brokerage for micro and
+                            small businesses in Croatia and the wider region.
                         </p>
-                        <div className="space-y-3 text-sm text-navy-400">
+                        <div className="space-y-3 text-sm text-navy-400 font-sans">
                             <div className="flex items-center gap-2">
                                 <MapPin className="w-4 h-4" />
                                 <span>Zagreb, Croatia</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Mail className="w-4 h-4" />
-                                <a href="mailto:info@dealflow.hr" className="hover:text-white transition-colors">
-                                    info@dealflow.hr
+                                <a href="mailto:info@heritance.hr" className="hover:text-white transition-colors">
+                                    info@heritance.hr
                                 </a>
                             </div>
                             <div className="flex items-center gap-2">
@@ -96,7 +96,7 @@ export default function Footer() {
                     {/* Link columns */}
                     {Object.entries(footerLinks).map(([title, links]) => (
                         <div key={title}>
-                            <h4 className="text-sm font-semibold uppercase tracking-wider text-navy-400 mb-4">
+                            <h4 className="text-sm font-semibold uppercase tracking-wider text-navy-400 mb-4 font-sans">
                                 {title}
                             </h4>
                             <ul className="space-y-3">
@@ -104,7 +104,7 @@ export default function Footer() {
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm text-navy-300 hover:text-white transition-colors"
+                                            className="text-sm text-navy-300 hover:text-white transition-colors font-sans"
                                         >
                                             {link.label}
                                         </Link>
@@ -119,10 +119,10 @@ export default function Footer() {
             {/* Bottom bar */}
             <div className="border-t border-white/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-navy-400">
-                        <p>© {new Date().getFullYear()} DealFlow. All rights reserved.</p>
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-navy-400 font-sans">
+                        <p>© {new Date().getFullYear()} Heritance. All rights reserved.</p>
                         <p>
-                            Powered by AI · Built for Croatian M&A
+                            Where businesses find their next chapter.
                         </p>
                     </div>
                 </div>
