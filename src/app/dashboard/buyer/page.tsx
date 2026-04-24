@@ -2,7 +2,10 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import BuyerDashboardClient from './BuyerDashboardClient'
 
-export const metadata = { title: 'Buyer Dashboard' }
+export const metadata = {
+    title: 'Nadzorna ploča kupca',
+    description: 'Praćenje spremljenih prilika, NDA zahtjeva i budućih AI preporuka za akvizicije.',
+}
 
 export default async function BuyerDashboard() {
     const supabase = await createClient()

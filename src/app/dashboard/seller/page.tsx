@@ -2,7 +2,10 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import SellerDashboardClient from './SellerDashboardClient'
 
-export const metadata = { title: 'Seller Dashboard' }
+export const metadata = {
+    title: 'Nadzorna ploča prodavatelja',
+    description: 'Upravljanje profilima tvrtki, statusima objave i NDA interesom potencijalnih kupaca.',
+}
 
 export default async function SellerDashboard() {
     const supabase = await createClient()

@@ -135,17 +135,17 @@ export default function HomePage() {
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4 mb-9">
               <Link
                 href="/valuate"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg gradient-gold text-navy-950 font-bold text-base shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                className="cta-primary cta-primary-gold min-h-12 px-8 text-base hover:-translate-y-0.5 hover:shadow-xl"
               >
                 Procijenite vrijednost
-                <TrendingUp className="w-5 h-5" />
+                <TrendingUp className="h-5 w-5" />
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg border border-white/20 bg-white/[0.08] text-white font-bold text-base backdrop-blur-md transition-all hover:bg-white/[0.14]"
+                className="cta-primary cta-ghost-hero min-h-12 px-8 text-base"
               >
                 Povjerljiv razgovor
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="h-5 w-5" />
               </Link>
             </motion.div>
 
@@ -164,6 +164,28 @@ export default function HomePage() {
       <CroatiaDealNetwork />
       <DealMarquee />
 
+      <section className="bg-white py-14 border-y border-navy-100/70">
+        <div className="section-shell grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
+          <div>
+            <p className="eyebrow mb-4">Diskretan mandat</p>
+            <h2 className="text-2xl md:text-4xl font-display font-bold text-navy-950 mb-3">
+              Povjerenje se ne gradi šumom, nego disciplinom procesa.
+            </h2>
+            <p className="text-navy-600 font-sans max-w-2xl">
+              Heritance je osmišljen za vlasnike koji žele profesionalno testirati tržište bez javnog signala i bez kaotičnog pristupa kupcima.
+            </p>
+          </div>
+          <div className="premium-card p-6 md:p-7">
+            <p className="text-xs font-bold uppercase tracking-wider text-navy-500 mb-3">Način rada</p>
+            <ul className="space-y-3 text-sm text-navy-700 font-sans">
+              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-gold-600 mt-0.5" />Jedna kontakt točka kroz cijeli proces.</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-gold-600 mt-0.5" />Jasan redoslijed informacija prije i nakon NDA-a.</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-gold-600 mt-0.5" />Fokus na izvedive dogovore, ne na volumen upita.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 quiet-band">
         <div className="section-shell">
           <div className="max-w-3xl mx-auto text-center mb-14">
@@ -180,7 +202,7 @@ export default function HomePage() {
             {personas.map((persona) => {
               const Icon = persona.icon
               return (
-                <Link key={persona.title} href={persona.href} className="premium-card p-7 group transition-all hover:-translate-y-1 hover:shadow-elevated">
+                <Link key={persona.title} href={persona.href} className="premium-card p-7 group card-interactive hover:shadow-elevated">
                   <div className="w-12 h-12 rounded-lg gradient-accent flex items-center justify-center mb-6">
                     <Icon className="w-6 h-6 text-gold-400" />
                   </div>
@@ -213,7 +235,7 @@ export default function HomePage() {
             {features.map((feature) => {
               const Icon = feature.icon
               return (
-                <div key={feature.title} className="premium-panel p-6 transition-all hover:border-gold-500/30 hover:bg-white/[0.08]">
+                <div key={feature.title} className="premium-panel p-6 card-interactive hover:border-gold-500/30 hover:bg-white/[0.08]">
                   <div className="w-11 h-11 rounded-lg bg-gold-400/12 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5 text-gold-400" />
                   </div>
@@ -241,10 +263,10 @@ export default function HomePage() {
           <div className="text-center mt-14">
             <Link
               href="/sell"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg gradient-gold text-navy-950 font-bold shadow-lg transition-all hover:-translate-y-0.5"
+              className="cta-primary cta-primary-gold min-h-12 px-8 text-base hover:-translate-y-0.5"
             >
               Pogledajte proces prodaje
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
         </div>
@@ -276,6 +298,7 @@ export default function HomePage() {
 
           <div className="premium-card overflow-hidden">
             <table className="w-full">
+              <caption className="sr-only">Usporedba Heritance i klasičnog pristupa kupoprodaji</caption>
               <thead>
                 <tr className="bg-navy-50">
                   <th className="text-left py-4 px-6 text-sm font-bold text-navy-700 font-sans">Mogućnost</th>
@@ -317,17 +340,17 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/valuate"
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-lg gradient-gold text-navy-950 font-bold shadow-lg transition-all hover:-translate-y-0.5"
+              className="cta-primary cta-primary-gold min-h-12 px-9 text-base hover:-translate-y-0.5"
             >
               Pokrenite procjenu
-              <TrendingUp className="w-5 h-5" />
+              <TrendingUp className="h-5 w-5" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-lg border border-white/20 text-white font-bold hover:bg-white/10 transition-all"
+              className="cta-primary cta-ghost-hero min-h-12 px-9 text-base"
             >
               Dogovorite poziv
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
         </div>

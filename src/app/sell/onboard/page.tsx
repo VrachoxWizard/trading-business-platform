@@ -23,6 +23,7 @@ type Step = 1 | 2 | 3 | 4 | 5
 export default function OnboardPage() {
     const [step, setStep] = useState<Step>(1)
     const [loading, setLoading] = useState(false)
+    const [submitError, setSubmitError] = useState<string | null>(null)
     const router = useRouter()
     const supabase = createClient()
 
@@ -59,6 +60,7 @@ export default function OnboardPage() {
 
     const handleSubmit = async () => {
         setLoading(true)
+        setSubmitError(null)
         try {
             const { data: { user } } = await supabase.auth.getUser()
             if (!user) {
@@ -90,8 +92,8 @@ export default function OnboardPage() {
 
             if (error) throw error
             router.push('/dashboard/seller')
-        } catch (err) {
-            console.error('Failed to create listing:', err)
+        } catch {
+            setSubmitError('Nismo uspjeli spremiti nacrt. Provjerite podatke i pokušajte ponovno.')
         } finally {
             setLoading(false)
         }
@@ -209,6 +211,11 @@ export default function OnboardPage() {
                                     </div>
                                     <h2 className="text-2xl font-bold text-navy-950 mb-2">Spremno za predaju</h2>
                                     <p className="text-navy-500 mb-7 font-sans">Profil se sprema kao nacrt i ide na savjetnički pregled prije objave.</p>
+                                    {submitError && (
+                                        <p className="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                                            {submitError}
+                                        </p>
+                                    )}
                                     <button
                                         onClick={handleSubmit}
                                         disabled={loading}

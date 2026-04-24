@@ -90,7 +90,7 @@ function LoginForm() {
                     </div>
 
                     {error && (
-                        <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm mb-6">
+                        <div role="alert" className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm mb-6">
                             {error}
                         </div>
                     )}
@@ -194,9 +194,9 @@ function LoginForm() {
 
                 <p className="text-center text-sm text-navy-300 mt-6">
                     Nastavkom prihvaćate Heritance{' '}
-                    <Link href="#" className="text-gold-400 hover:text-gold-300">uvjete</Link>{' '}
+                    <Link href="/contact?topic=Uvjeti%20kori%C5%A1tenja" className="text-gold-400 hover:text-gold-300">uvjete</Link>{' '}
                     i{' '}
-                    <Link href="#" className="text-gold-400 hover:text-gold-300">pravila privatnosti</Link>.
+                    <Link href="/contact?topic=Privatnost%20i%20GDPR" className="text-gold-400 hover:text-gold-300">pravila privatnosti</Link>.
                 </p>
             </motion.div>
         </div>

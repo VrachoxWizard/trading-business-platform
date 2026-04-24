@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { DM_Sans, JetBrains_Mono, Playfair_Display } from 'next/font/google'
 import './globals.css'
+import AppMain from '@/components/layout/AppMain'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { cn } from '@/lib/utils'
@@ -27,6 +28,9 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: process.env.NEXT_PUBLIC_SITE_URL
+    ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+    : new URL('https://heritance.hr'),
   title: {
     default: 'Heritance - diskretna kupoprodaja tvrtki',
     template: '%s | Heritance',
@@ -52,6 +56,12 @@ export const metadata: Metadata = {
     description:
       'Premium M&A savjetovanje i digitalna platforma za hrvatske vlasnike, kupce i investitore.',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Heritance - diskretna kupoprodaja tvrtki',
+    description:
+      'Premium M&A savjetovanje i digitalna platforma za hrvatske vlasnike, kupce i investitore.',
+  },
 }
 
 export default function RootLayout({
@@ -70,8 +80,14 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-screen flex flex-col bg-background text-foreground">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2.5 focus:text-sm focus:font-bold focus:text-navy-950 focus:shadow-elevated focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold-500"
+        >
+          Preskoči na sadržaj
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <AppMain>{children}</AppMain>
         <Footer />
       </body>
     </html>

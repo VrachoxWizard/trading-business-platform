@@ -32,6 +32,13 @@ const steps = [
     { num: '04', title: 'Due diligence i ponuda', desc: 'Pitanja, dokumenti, LOI i struktura dogovora vode se kroz organiziran proces.' },
 ]
 
+const investorLens = [
+    'Operativna stabilnost',
+    'Kvaliteta EBITDA-e',
+    'Rizik koncentracije kupaca',
+    'Skalabilnost modela',
+]
+
 export default function BuyPage() {
     return (
         <div className="min-h-screen">
@@ -54,11 +61,11 @@ export default function BuyPage() {
                                 Heritance kupcima i investitorima daje pristup strukturiranim prilikama, jasnim metrikama i kontroliranom NDA procesu prije dubinskog uvida.
                             </motion.p>
                             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
-                                <Link href="/listings" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg gradient-gold text-navy-950 font-bold shadow-lg transition-all hover:-translate-y-0.5">
+                                <Link href="/listings" className="cta-primary cta-primary-gold px-8 py-4 hover:-translate-y-0.5 hover:shadow-lg">
                                     Pregledajte prilike
                                     <Search className="w-5 h-5" />
                                 </Link>
-                                <Link href="/login?mode=signup" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg border border-white/20 text-white font-bold hover:bg-white/10 transition-all">
+                                <Link href="/login?mode=signup" className="cta-secondary px-8 py-4 border-white/20 text-white hover:bg-white/10">
                                     Kreirajte profil kupca
                                     <ArrowRight className="w-5 h-5" />
                                 </Link>
@@ -76,7 +83,7 @@ export default function BuyPage() {
                                 ].map((item) => (
                                     <div key={item.label} className="rounded-lg bg-white/[0.06] p-4 border border-white/10">
                                         <p className="text-xs uppercase tracking-wider text-navy-300 mb-1">{item.label}</p>
-                                        <p className="text-xl font-bold text-white">{item.value}</p>
+                                        <p className="text-xl font-bold text-white metric-numeral">{item.value}</p>
                                     </div>
                                 ))}
                             </div>
@@ -91,11 +98,26 @@ export default function BuyPage() {
 
             <section className="py-20 bg-white">
                 <div className="section-shell">
-                    <div className="text-center max-w-3xl mx-auto mb-14">
-                        <p className="eyebrow mb-4">Za ozbiljne kupce</p>
-                        <h2 className="text-3xl md:text-4xl font-bold text-navy-950">
-                            Manje nasumičnog pretraživanja, više kvalitetnih razgovora.
-                        </h2>
+                    <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-8 items-start mb-12">
+                        <aside className="premium-card p-6 md:p-7">
+                            <p className="text-xs font-bold uppercase tracking-wider text-navy-500 mb-4">Kako gledamo prilike</p>
+                            <div className="space-y-2">
+                                {investorLens.map((item) => (
+                                    <div key={item} className="rounded-lg bg-navy-50 border border-navy-100 px-3 py-2 text-sm font-semibold text-navy-700">
+                                        {item}
+                                    </div>
+                                ))}
+                            </div>
+                        </aside>
+                        <div>
+                            <p className="eyebrow mb-4">Za ozbiljne kupce</p>
+                            <h2 className="text-3xl md:text-4xl font-bold text-navy-950 mb-4">
+                                Manje nasumičnog pretraživanja, više kvalitetnih razgovora.
+                            </h2>
+                            <p className="text-navy-600 font-sans max-w-2xl">
+                                Tržnica nije katalog svega dostupnog, nego selekcija prilika koje mogu proći discipliniran investicijski pregled.
+                            </p>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {benefits.map((benefit) => {
@@ -154,11 +176,11 @@ export default function BuyPage() {
                         Ako trenutno nema odgovarajućih prilika, profil kupca pomaže da budete prvi u redu kada se pojave.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/listings" className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-lg gradient-gold text-navy-950 font-bold shadow-lg transition-all hover:-translate-y-0.5">
+                        <Link href="/listings" className="cta-primary cta-primary-gold px-9 py-4 hover:-translate-y-0.5 hover:shadow-lg">
                             Tržnica prilika
                             <BarChart3 className="w-5 h-5" />
                         </Link>
-                        <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-9 py-4 rounded-lg border border-navy-200 text-navy-950 font-bold hover:bg-navy-50 transition-all">
+                        <Link href="/contact" className="cta-secondary px-9 py-4 text-navy-950 hover:bg-navy-50">
                             Razgovor sa savjetnikom
                             <FileText className="w-5 h-5" />
                         </Link>

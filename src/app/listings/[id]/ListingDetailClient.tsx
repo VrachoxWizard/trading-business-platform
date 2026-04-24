@@ -77,6 +77,7 @@ export default function ListingDetailClient({ listing, user, hasNda }: ListingDe
     const ebitdaMultiple = listing.ebitda && listing.asking_price
         ? (listing.asking_price / listing.ebitda).toFixed(1)
         : null
+    const dataAccessLabel = hasNda ? 'NDA aktivan' : 'NDA potreban'
 
     return (
         <div className="min-h-screen bg-background pt-24">
@@ -102,6 +103,10 @@ export default function ListingDetailClient({ listing, user, hasNda }: ListingDe
                                                 Anonimno
                                             </span>
                                         )}
+                                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold ${hasNda ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'}`}>
+                                            <Lock className="w-3 h-3" />
+                                            {dataAccessLabel}
+                                        </span>
                                     </div>
                                     <h1 className="text-3xl md:text-4xl font-bold text-navy-950 mb-3">{listing.title}</h1>
                                     <div className="flex flex-wrap items-center gap-4 text-sm text-navy-500 font-sans">
@@ -134,6 +139,15 @@ export default function ListingDetailClient({ listing, user, hasNda }: ListingDe
                                 </div>
                             </div>
 
+                            <div className="premium-card p-5 bg-navy-50/70 border-navy-100">
+                                <p className="text-xs font-bold uppercase tracking-wider text-navy-500 mb-3">Diligence fokus</p>
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm font-sans">
+                                    <p className="rounded-lg bg-white border border-navy-100 px-3 py-2 text-navy-700">Kvaliteta prihoda i marži</p>
+                                    <p className="rounded-lg bg-white border border-navy-100 px-3 py-2 text-navy-700">Operativna ovisnost o vlasniku</p>
+                                    <p className="rounded-lg bg-white border border-navy-100 px-3 py-2 text-navy-700">Ugovori i stabilnost kupaca</p>
+                                </div>
+                            </div>
+
                             {!hasNda && (
                                 <div className="bg-gold-100 border border-gold-200 rounded-lg p-6 text-center">
                                     <Lock className="w-8 h-8 text-gold-700 mx-auto mb-3" />
@@ -152,7 +166,7 @@ export default function ListingDetailClient({ listing, user, hasNda }: ListingDe
                             <div className="space-y-4">
                                 <div>
                                     <p className="text-xs text-navy-400 mb-1">Tražena cijena</p>
-                                    <p className="text-2xl font-bold text-navy-950 flex items-center gap-1">
+                                    <p className="text-2xl font-bold text-navy-950 flex items-center gap-1 metric-numeral">
                                         <Euro className="w-5 h-5 text-gold-600" />
                                         {listing.asking_price ? formatCurrency(listing.asking_price) : 'Na upit'}
                                     </p>
@@ -161,11 +175,11 @@ export default function ListingDetailClient({ listing, user, hasNda }: ListingDe
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <p className="text-xs text-navy-400 mb-1">Prihod</p>
-                                        <p className="text-sm font-bold text-navy-950">{listing.revenue ? formatCurrency(listing.revenue) : hasNda ? '-' : 'Zaključano'}</p>
+                                        <p className="text-sm font-bold text-navy-950 metric-numeral">{listing.revenue ? formatCurrency(listing.revenue) : hasNda ? '-' : 'Zaključano'}</p>
                                     </div>
                                     <div>
                                         <p className="text-xs text-navy-400 mb-1">EBITDA</p>
-                                        <p className="text-sm font-bold text-navy-950">{listing.ebitda ? formatCurrency(listing.ebitda) : hasNda ? '-' : 'Zaključano'}</p>
+                                        <p className="text-sm font-bold text-navy-950 metric-numeral">{listing.ebitda ? formatCurrency(listing.ebitda) : hasNda ? '-' : 'Zaključano'}</p>
                                     </div>
                                 </div>
                                 {ebitdaMultiple && (
@@ -186,13 +200,13 @@ export default function ListingDetailClient({ listing, user, hasNda }: ListingDe
                         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.14 }} className="premium-card p-6">
                             {!user ? (
                                 <ActionState icon={Shield} title="Prijavite se za pristup" desc="Kreirajte račun kako biste zatražili NDA pristup i pratili priliku.">
-                                    <Link href="/login?mode=signup" className="block w-full py-3 rounded-lg gradient-accent text-white font-bold text-sm text-center shadow-lg">
+                                    <Link href="/login?mode=signup" className="cta-primary cta-primary-ink w-full">
                                         Kreirajte račun
                                     </Link>
                                 </ActionState>
                             ) : hasNda ? (
                                 <ActionState icon={CheckCircle2} title="NDA pristup odobren" desc="Možete pristupiti dodatnim dokumentima i pitanjima u transakcijskoj sobi.">
-                                    <button className="block w-full py-3 rounded-lg gradient-accent text-white font-bold text-sm text-center shadow-lg">
+                                    <button className="cta-primary cta-primary-ink w-full">
                                         <FileText className="w-4 h-4 inline mr-2" />
                                         Otvori data room
                                     </button>
@@ -201,13 +215,13 @@ export default function ListingDetailClient({ listing, user, hasNda }: ListingDe
                                 <ActionState icon={AlertCircle} title="Zahtjev je poslan" desc="Savjetnik će pregledati zahtjev i javiti se s idućim korakom." />
                             ) : listing.seller_id === user.id ? (
                                 <ActionState icon={Star} title="Vaš profil" desc="Ovim profilom upravljate kroz prodavateljsku nadzornu ploču.">
-                                    <Link href="/dashboard/seller" className="block w-full py-3 rounded-lg gradient-gold text-navy-950 font-bold text-sm text-center shadow-lg">
+                                    <Link href="/dashboard/seller" className="cta-primary cta-primary-gold w-full">
                                         Nadzorna ploča
                                     </Link>
                                 </ActionState>
                             ) : (
                                 <ActionState icon={Lock} title="Zatražite NDA pristup" desc="Nakon odobrenja otvara se puni set dokumenata i dodatnih financija.">
-                                    <button onClick={requestNda} disabled={ndaLoading} className="block w-full py-3 rounded-lg gradient-accent text-white font-bold text-sm text-center shadow-lg hover:shadow-xl transition-all disabled:opacity-50">
+                                    <button onClick={requestNda} disabled={ndaLoading} className="cta-primary cta-primary-ink w-full hover:shadow-lg disabled:opacity-50">
                                         {ndaLoading ? (
                                             <span className="block w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mx-auto" />
                                         ) : (

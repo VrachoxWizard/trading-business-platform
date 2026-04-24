@@ -63,6 +63,23 @@ export default function Header() {
     const navText = solidHeader ? 'text-navy-700' : 'text-white/85'
     const brandText = solidHeader ? 'text-navy-950' : 'text-white'
 
+    useEffect(() => {
+        if (!isOpen) return
+
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') setIsOpen(false)
+        }
+
+        const previousOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+        window.addEventListener('keydown', onKeyDown)
+
+        return () => {
+            document.body.style.overflow = previousOverflow
+            window.removeEventListener('keydown', onKeyDown)
+        }
+    }, [isOpen])
+
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${solidHeader
@@ -106,7 +123,7 @@ export default function Header() {
                         {user ? (
                             <Link
                                 href="/dashboard"
-                                className="flex items-center gap-2 px-5 py-2.5 rounded-lg gradient-gold text-navy-950 font-bold text-sm shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                                className="cta-primary cta-primary-gold hover:-translate-y-0.5 hover:shadow-lg"
                             >
                                 <LayoutDashboard className="w-4 h-4" />
                                 Nadzorna ploča
@@ -125,7 +142,7 @@ export default function Header() {
                                 </Link>
                                 <Link
                                     href="/login?mode=signup"
-                                    className="flex items-center gap-2 px-5 py-2.5 rounded-lg gradient-gold text-navy-950 font-bold text-sm shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                                    className="cta-primary cta-primary-gold hover:-translate-y-0.5 hover:shadow-lg"
                                 >
                                     Počnite
                                     <ChevronRight className="w-4 h-4" />
@@ -139,6 +156,7 @@ export default function Header() {
                         className={`lg:hidden p-2 rounded-lg transition-colors ${solidHeader ? 'text-navy-950' : 'text-white'}`}
                         aria-label="Otvori navigaciju"
                         aria-expanded={isOpen}
+                        aria-controls="mobile-navigation"
                     >
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
@@ -152,6 +170,10 @@ export default function Header() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         className="lg:hidden bg-background border-t border-border mt-3 shadow-md"
+                        id="mobile-navigation"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Mobilna navigacija"
                     >
                         <div className="px-4 py-4 space-y-2">
                             {navItems.map((item) => {
@@ -177,7 +199,7 @@ export default function Header() {
                                 <Link
                                     href="/dashboard"
                                     onClick={() => setIsOpen(false)}
-                                    className="flex items-center gap-3 px-4 py-3 rounded-lg gradient-gold text-navy-950 font-bold text-sm"
+                                    className="cta-primary cta-primary-gold w-full justify-start px-4 py-3"
                                 >
                                     <LayoutDashboard className="w-5 h-5" />
                                     Nadzorna ploča
@@ -195,7 +217,7 @@ export default function Header() {
                                     <Link
                                         href="/login?mode=signup"
                                         onClick={() => setIsOpen(false)}
-                                        className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg gradient-gold text-navy-950 font-bold text-sm"
+                                        className="cta-primary cta-primary-gold w-full"
                                     >
                                         Počnite
                                         <ChevronRight className="w-4 h-4" />

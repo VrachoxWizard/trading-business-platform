@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { Mail, MapPin, Phone } from 'lucide-react'
 
-const footerLinks = {
+type FooterLink = { label: string; href?: string; soon?: boolean }
+
+const footerLinks: Record<string, FooterLink[]> = {
     Platforma: [
         { label: 'Tržnica prilika', href: '/listings' },
         { label: 'Procjena vrijednosti', href: '/valuate' },
@@ -15,10 +17,10 @@ const footerLinks = {
         { label: 'Za partnere', href: '/contact' },
     ],
     Povjerenje: [
-        { label: 'Povjerljivost', href: '#' },
-        { label: 'NDA proces', href: '#' },
-        { label: 'Uvjeti korištenja', href: '#' },
-        { label: 'Privatnost i GDPR', href: '#' },
+        { label: 'Povjerljivost', href: '/contact?topic=Povjerljivost' },
+        { label: 'NDA proces', href: '/contact?topic=NDA%20proces' },
+        { label: 'Uvjeti korištenja', soon: true },
+        { label: 'Privatnost i GDPR', soon: true },
     ],
 }
 
@@ -40,13 +42,13 @@ export default function Footer() {
                         <div className="flex flex-col sm:flex-row gap-3">
                             <Link
                                 href="/valuate"
-                                className="px-6 py-3 rounded-lg gradient-gold text-navy-950 font-bold text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                                className="cta-primary cta-primary-gold hover:-translate-y-0.5 hover:shadow-lg"
                             >
                                 Procijenite tvrtku
                             </Link>
                             <Link
                                 href="/contact"
-                                className="px-6 py-3 rounded-lg border border-white/20 text-white font-bold text-sm hover:bg-white/10 transition-all"
+                                className="cta-secondary border-white/20 text-white hover:bg-white/10"
                             >
                                 Zatražite razgovor
                             </Link>
@@ -97,12 +99,21 @@ export default function Footer() {
                             <ul className="space-y-3">
                                 {links.map((link) => (
                                     <li key={link.label}>
-                                        <Link
-                                            href={link.href}
-                                            className="text-sm text-navy-300 hover:text-white transition-colors font-sans"
-                                        >
-                                            {link.label}
-                                        </Link>
+                                        {link.soon ? (
+                                            <span className="inline-flex items-center gap-2 text-sm text-navy-400 font-sans">
+                                                {link.label}
+                                                <span className="rounded-full border border-white/20 px-2 py-0.5 text-[10px] uppercase tracking-wider">
+                                                    uskoro
+                                                </span>
+                                            </span>
+                                        ) : (
+                                            <Link
+                                                href={link.href || '/contact'}
+                                                className="text-sm text-navy-300 hover:text-white transition-colors font-sans"
+                                            >
+                                                {link.label}
+                                            </Link>
+                                        )}
                                     </li>
                                 ))}
                             </ul>

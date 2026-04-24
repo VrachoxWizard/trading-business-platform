@@ -108,15 +108,15 @@ export default function ListingsClient({ listings }: { listings: Listing[] }) {
                     <div className="premium-card p-5">
                         <div className="grid grid-cols-3 gap-3 text-center">
                             <div>
-                                <p className="text-2xl font-bold text-navy-950">{listings.length}</p>
+                                <p className="text-2xl font-bold text-navy-950 metric-numeral">{listings.length}</p>
                                 <p className="text-xs text-navy-500 font-sans">aktivno</p>
                             </div>
                             <div>
-                                <p className="text-2xl font-bold text-navy-950">{activeFilters}</p>
+                                <p className="text-2xl font-bold text-navy-950 metric-numeral">{activeFilters}</p>
                                 <p className="text-xs text-navy-500 font-sans">filtera</p>
                             </div>
                             <div>
-                                <p className="text-2xl font-bold text-navy-950">{filtered.length}</p>
+                                <p className="text-2xl font-bold text-navy-950 metric-numeral">{filtered.length}</p>
                                 <p className="text-xs text-navy-500 font-sans">prikazano</p>
                             </div>
                         </div>
@@ -218,7 +218,7 @@ export default function ListingsClient({ listings }: { listings: Listing[] }) {
 
                 <div className="flex items-center justify-between gap-4 mb-5">
                     <p className="text-sm text-navy-500 font-sans">
-                        Prikazano <span className="font-bold text-navy-700">{filtered.length}</span> {filtered.length === 1 ? 'prilika' : 'prilika'}
+                        Prikazano <span className="font-bold text-navy-700 metric-numeral">{filtered.length}</span> {filtered.length === 1 ? 'prilika' : 'prilike'}
                     </p>
                     <div className="hidden sm:flex items-center gap-2 text-xs text-navy-500 font-bold uppercase tracking-wider">
                         <SlidersHorizontal className="w-4 h-4" />
@@ -235,15 +235,15 @@ export default function ListingsClient({ listings }: { listings: Listing[] }) {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.03 }}
                             >
-                                <Link href={`/listings/${listing.id}`} className="premium-card block overflow-hidden group h-full transition-all hover:-translate-y-1 hover:shadow-elevated">
+                                <Link href={`/listings/${listing.id}`} className="premium-card block overflow-hidden group h-full card-interactive hover:shadow-elevated">
                                     <div className="p-6">
                                         <div className="flex items-start justify-between gap-3 mb-4">
                                             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-gold-100 text-gold-700 text-xs font-bold">
-                                                <Building2 className="w-3 h-3" />
+                                                <Building2 className="w-3.5 h-3.5" />
                                                 {listing.industry}
                                             </span>
                                             <span className="text-xs text-navy-400 flex items-center gap-1">
-                                                <Calendar className="w-3 h-3" />
+                                                <Calendar className="w-3.5 h-3.5" />
                                                 {timeAgo(listing.created_at)}
                                             </span>
                                         </div>
@@ -268,20 +268,20 @@ export default function ListingsClient({ listings }: { listings: Listing[] }) {
                                         <div className="grid grid-cols-3 gap-3">
                                             <div>
                                                 <p className="text-xs text-navy-400 mb-1">Cijena</p>
-                                                <p className="text-sm font-bold text-navy-950">
+                                                <p className="text-sm font-bold text-navy-950 metric-numeral">
                                                     {listing.asking_price ? formatCurrency(listing.asking_price) : 'Na upit'}
                                                 </p>
                                             </div>
                                             <div>
                                                 <p className="text-xs text-navy-400 mb-1">Prihod</p>
-                                                <p className="text-sm font-bold text-navy-950">
+                                                <p className="text-sm font-bold text-navy-950 metric-numeral">
                                                     {listing.revenue ? formatCurrency(listing.revenue) : '-'}
                                                 </p>
                                             </div>
                                             <div>
                                                 <p className="text-xs text-navy-400 mb-1">Tim</p>
-                                                <p className="text-sm font-bold text-navy-950 flex items-center gap-1">
-                                                    <Users className="w-3 h-3 text-navy-400" />
+                                                <p className="text-sm font-bold text-navy-950 flex items-center gap-1 metric-numeral">
+                                                    <Users className="w-3.5 h-3.5 text-navy-400" />
                                                     {listing.employee_count || '-'}
                                                 </p>
                                             </div>

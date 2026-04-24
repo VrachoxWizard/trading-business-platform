@@ -56,6 +56,10 @@ export default function BuyerDashboardClient({ profile, buyerProfile, shortlists
         { icon: Clock, label: 'Na čekanju', value: ndas.filter((nda) => nda.status === 'pending').length, color: 'bg-amber-50 text-amber-600' },
         { icon: Target, label: 'Ciljne industrije', value: buyerProfile?.target_industries?.length || 0, color: 'bg-gold-100 text-gold-700' },
     ]
+    const preferredRange =
+        buyerProfile?.min_ev && buyerProfile?.max_ev
+            ? `${formatCurrency(buyerProfile.min_ev)} - ${formatCurrency(buyerProfile.max_ev)}`
+            : 'Nije definirano'
 
     return (
         <div className="min-h-screen bg-background pt-24">
@@ -69,7 +73,7 @@ export default function BuyerDashboardClient({ profile, buyerProfile, shortlists
                         <p className="text-navy-500 mt-1 font-sans">Pratite spremljene prilike, NDA zahtjeve i buduća uparivanja.</p>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
-                        <Link href="/listings" className="flex items-center gap-2 px-5 py-2.5 rounded-lg gradient-accent text-white font-bold text-sm shadow-lg">
+                        <Link href="/listings" className="cta-primary cta-primary-ink hover:-translate-y-0.5 hover:shadow-lg">
                             <Search className="w-4 h-4" />
                             Tržnica prilika
                         </Link>
@@ -82,19 +86,29 @@ export default function BuyerDashboardClient({ profile, buyerProfile, shortlists
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    {stats.map((stat) => {
-                        const Icon = stat.icon
-                        return (
-                            <div key={stat.label} className="premium-card p-5">
-                                <div className={`w-10 h-10 rounded-lg ${stat.color} flex items-center justify-center mb-3`}>
-                                    <Icon className="w-5 h-5" />
+                <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-6 mb-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        {stats.map((stat) => {
+                            const Icon = stat.icon
+                            return (
+                                <div key={stat.label} className="premium-card p-5">
+                                    <div className={`w-10 h-10 rounded-lg ${stat.color} flex items-center justify-center mb-3`}>
+                                        <Icon className="w-5 h-5" />
+                                    </div>
+                                    <p className="text-2xl font-bold text-navy-950 metric-numeral">{stat.value}</p>
+                                    <p className="text-xs text-navy-400 mt-1 font-sans">{stat.label}</p>
                                 </div>
-                                <p className="text-2xl font-bold text-navy-950">{stat.value}</p>
-                                <p className="text-xs text-navy-400 mt-1 font-sans">{stat.label}</p>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
+                    <aside className="premium-card p-5">
+                        <p className="text-xs font-bold uppercase tracking-wider text-navy-500 mb-3">Investicijski profil</p>
+                        <div className="space-y-2 text-sm font-sans">
+                            <p className="text-navy-700"><span className="font-semibold">Raspon EV:</span> <span className="metric-numeral">{preferredRange}</span></p>
+                            <p className="text-navy-700"><span className="font-semibold">Industrije:</span> {buyerProfile?.target_industries?.length || 0}</p>
+                            <p className="text-navy-700"><span className="font-semibold">Regije:</span> {buyerProfile?.target_regions?.length || 0}</p>
+                        </div>
+                    </aside>
                 </div>
 
                 <div className="premium-card">
@@ -126,13 +140,13 @@ export default function BuyerDashboardClient({ profile, buyerProfile, shortlists
                             shortlists.length > 0 ? (
                                 <div className="space-y-3">
                                     {shortlists.map((item) => (
-                                        <div key={item.id} className="flex items-center justify-between gap-4 p-4 rounded-lg bg-navy-50 hover:bg-navy-100 transition-colors">
+                                        <div key={item.id} className="flex items-center justify-between gap-4 p-4 rounded-lg bg-navy-50 hover:bg-navy-100 card-interactive border border-navy-100">
                                             <div className="flex-1 min-w-0">
                                                 <h3 className="text-sm font-bold text-navy-950 truncate">{item.listings?.title}</h3>
                                                 <div className="flex flex-wrap items-center gap-3 text-xs text-navy-400 mt-1">
                                                     <span>{item.listings?.industry}</span>
-                                                    <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {item.listings?.region}</span>
-                                                    {item.listings?.asking_price && <span>{formatCurrency(item.listings.asking_price)}</span>}
+                                                    <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> {item.listings?.region}</span>
+                                                    {item.listings?.asking_price && <span className="metric-numeral">{formatCurrency(item.listings.asking_price)}</span>}
                                                 </div>
                                             </div>
                                             <Link href={`/listings/${item.listing_id}`} className="text-gold-700 hover:text-gold-600" aria-label="Otvori priliku">
@@ -150,7 +164,7 @@ export default function BuyerDashboardClient({ profile, buyerProfile, shortlists
                             ndas.length > 0 ? (
                                 <div className="space-y-3">
                                     {ndas.map((nda) => (
-                                        <div key={nda.id} className="flex items-center justify-between gap-4 p-4 rounded-lg bg-navy-50">
+                                        <div key={nda.id} className="flex items-center justify-between gap-4 p-4 rounded-lg bg-navy-50 border border-navy-100 card-interactive">
                                             <div>
                                                 <div className="flex items-center gap-2 mb-1">
                                                     {nda.status === 'pending' && <Clock className="w-4 h-4 text-amber-500" />}
@@ -197,7 +211,7 @@ function EmptyState({ icon: Icon, title, desc, href, cta }: {
             <p className="text-navy-600 font-bold mb-2">{title}</p>
             <p className="text-sm text-navy-400 max-w-md mx-auto mb-5 font-sans">{desc}</p>
             {href && cta && (
-                <Link href={href} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg gradient-accent text-white font-bold text-sm">
+                <Link href={href} className="cta-primary cta-primary-ink">
                     <Search className="w-4 h-4" />
                     {cta}
                 </Link>

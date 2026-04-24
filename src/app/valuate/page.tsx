@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import type { ElementType } from 'react'
 import Link from 'next/link'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -62,7 +62,6 @@ export default function ValuatePage() {
         control,
         trigger,
         handleSubmit,
-        watch,
         setValue,
         formState: { errors, isSubmitting },
     } = useForm<ValuationData>({
@@ -86,8 +85,8 @@ export default function ValuatePage() {
         mode: 'onChange',
     })
 
-    const watchMarketTrend = watch('marketTrend')
-    const allData = watch()
+    const marketTrend = useWatch({ control, name: 'marketTrend' })
+    const allData = useWatch({ control }) as ValuationData | undefined
 
     const handleNextStep = async () => {
         let fieldsToValidate: (keyof ValuationData)[] = []
@@ -223,6 +222,11 @@ Napomena: Ovo je isključivo indikativna procjena temeljna na vlastitoj procjeni
                     >
                         <div className="premium-card p-6 md:p-8">
                             <form onSubmit={handleSubmit(generateReport)}>
+                                {Object.keys(errors).length > 0 && step < 5 && (
+                                    <div className="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                                        Provjerite označena polja prije nastavka.
+                                    </div>
+                                )}
                                 {step === 1 && (
                                     <div className="space-y-6">
                                         <SectionTitle icon={Building2} title="Osnovni podaci" desc="Prvo definiramo kontekst i okvir poslovanja tvrtke." />
@@ -285,7 +289,7 @@ Napomena: Ovo je isključivo indikativna procjena temeljna na vlastitoj procjeni
                                         <div className="pt-4 border-t border-navy-100 space-y-4 mt-4">
                                             <p className="text-sm font-semibold text-navy-950 font-sans">Opcionalni financijski pokazatelji</p>
                                             <div>
-                                                <label className="block text-sm font-bold text-navy-700 mb-1.5 font-sans">SDE (Seller's Discretionary Earnings)</label>
+                                                <label className="block text-sm font-bold text-navy-700 mb-1.5 font-sans">SDE (Sellers Discretionary Earnings)</label>
                                                 <input type="number" {...register('sde')} className="field-shell" placeholder="150000" />
                                             </div>
                                             <div>
@@ -308,7 +312,7 @@ Napomena: Ovo je isključivo indikativna procjena temeljna na vlastitoj procjeni
                                             <div key={factor.key} className="bg-navy-50 p-4 rounded-lg border border-navy-100">
                                                 <div className="flex justify-between mb-2">
                                                     <label className="text-sm font-bold text-navy-950 font-sans">{factor.label}</label>
-                                                    <span className="text-sm font-bold text-gold-700 font-sans">{allData[factor.key] || 5}/10</span>
+                                                    <span className="text-sm font-bold text-gold-700 font-sans">{(allData?.[factor.key] as number) || 5}/10</span>
                                                 </div>
                                                 <Controller
                                                     control={control}
@@ -345,7 +349,7 @@ Napomena: Ovo je isključivo indikativna procjena temeljna na vlastitoj procjeni
                                                         key={trend.key}
                                                         type="button"
                                                         onClick={() => setValue('marketTrend', trend.key as 'growing'|'stable'|'declining', { shouldValidate: true })}
-                                                        className={`py-3.5 rounded-lg border text-sm font-bold transition-all shadow-sm ${watchMarketTrend === trend.key
+                                                        className={`py-3.5 rounded-lg border text-sm font-bold transition-all shadow-sm ${marketTrend === trend.key
                                                             ? 'border-navy-950 bg-navy-950 text-white'
                                                             : 'border-navy-200 bg-white text-navy-700 hover:border-navy-400'
                                                             }`}
@@ -374,7 +378,7 @@ Napomena: Ovo je isključivo indikativna procjena temeljna na vlastitoj procjeni
                                                 <TrendingUp className="w-8 h-8 text-navy-950" />
                                             </div>
                                             <h2 className="text-2xl md:text-3xl font-display font-bold text-navy-950 mb-2">Vaš indikativni izvještaj</h2>
-                                            <p className="text-navy-500 font-sans">{allData.industry} / {allData.region}</p>
+                                            <p className="text-navy-500 font-sans">{allData?.industry} / {allData?.region}</p>
                                         </div>
 
                                         <div className="bg-white border border-navy-100 rounded-lg p-6 md:p-8 shadow-sm">
@@ -385,7 +389,7 @@ Napomena: Ovo je isključivo indikativna procjena temeljna na vlastitoj procjeni
                                                 <ValueBlock label="Konzervativno" value={formatCurrency(report.low)} />
                                                 <div className="bg-navy-50 rounded-lg p-6 shadow-sm border border-navy-100 scale-105">
                                                     <p className="text-xs font-bold text-navy-700 uppercase tracking-wider mb-2">Središnja vrijednost</p>
-                                                    <p className="text-3xl font-bold text-navy-950 tracking-tight">{formatCurrency(report.mid)}</p>
+                                                    <p className="text-3xl font-bold text-navy-950 tracking-tight metric-numeral">{formatCurrency(report.mid)}</p>
                                                 </div>
                                                 <ValueBlock label="Optimistično" value={formatCurrency(report.high)} />
                                             </div>
@@ -397,7 +401,7 @@ Napomena: Ovo je isključivo indikativna procjena temeljna na vlastitoj procjeni
                                                     <h3 className="text-lg font-bold text-navy-950">Indeks spremnosti za prodaju</h3>
                                                     <p className="text-xs text-navy-500 font-sans">Sell-Readiness Score baziran na kvaliteti i ovisnosti o vlasniku.</p>
                                                 </div>
-                                                <span className={`text-3xl font-bold ${report.readiness >= 70 ? 'text-green-600' : report.readiness >= 40 ? 'text-amber-500' : 'text-red-500'}`}>
+                                                <span className={`text-3xl font-bold metric-numeral ${report.readiness >= 70 ? 'text-green-600' : report.readiness >= 40 ? 'text-amber-500' : 'text-red-500'}`}>
                                                     {report.readiness}/100
                                                 </span>
                                             </div>

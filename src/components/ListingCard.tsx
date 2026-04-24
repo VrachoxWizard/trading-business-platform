@@ -30,7 +30,7 @@ export default function ListingCard({
     const statusConfig = LISTING_STATUSES[status] || LISTING_STATUSES.active
 
     return (
-        <div className="premium-card hover:shadow-elevated hover:border-gold-600/30 transition-all group overflow-hidden">
+        <div className="premium-card card-interactive hover:shadow-elevated hover:border-gold-600/30 group overflow-hidden">
             <div className="px-6 pt-5 pb-4 border-b border-navy-100">
                 <div className="flex items-start justify-between gap-3 mb-3">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-navy-50 text-navy-700 font-sans">
@@ -94,7 +94,7 @@ function Metric({ label, value, accent = false }: { label: string; value: string
     return (
         <div>
             <p className="text-xs text-muted-foreground font-sans mb-1">{label}</p>
-            <p className={`text-sm font-bold font-mono ${accent ? 'text-gold-700' : 'text-navy-950'}`}>
+            <p className={`text-sm font-bold font-mono metric-numeral ${accent ? 'text-gold-700' : 'text-navy-950'}`}>
                 {value}
             </p>
         </div>

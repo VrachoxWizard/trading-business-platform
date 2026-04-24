@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSearchParams } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { motion } from 'framer-motion'
@@ -23,6 +24,7 @@ const fadeIn = {
 }
 
 export default function ContactPage() {
+    const searchParams = useSearchParams()
     const [submitted, setSubmitted] = useState(false)
     const [submitError, setSubmitError] = useState<string | null>(null)
 
@@ -36,7 +38,7 @@ export default function ContactPage() {
             name: '',
             email: '',
             company: '',
-            topic: 'Razmišljam o prodaji tvrtke',
+            topic: searchParams.get('topic') || 'Razmišljam o prodaji tvrtke',
             message: '',
         },
     })
@@ -44,21 +46,20 @@ export default function ContactPage() {
     const onSubmit = async (data: ContactFormValues) => {
         setSubmitError(null)
         try {
-            // Attempt to submit to API, fallback gracefully if endpoint doesn't exist
             const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
-            }).catch(() => null)
-            
-            // If API doesn't exist yet, we still simulate a fast, successful submission 
-            // for the MVP demo, rather than breaking.
-            if (!res || !res.ok) {
-                await new Promise((resolve) => setTimeout(resolve, 400))
+            })
+
+            if (!res.ok) {
+                const responseData = (await res.json().catch(() => null)) as { error?: string } | null
+                setSubmitError(responseData?.error || 'Došlo je do greške prilikom slanja poruke. Molimo pokušajte ponovno.')
+                return
             }
-            
+
             setSubmitted(true)
-        } catch (error) {
+        } catch {
             setSubmitError('Došlo je do greške prilikom slanja poruke. Molimo pokušajte ponovno.')
         }
     }

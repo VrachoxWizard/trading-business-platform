@@ -39,6 +39,12 @@ const steps = [
     { icon: CheckCircle2, title: '7. Zatvaranje i tranzicija', desc: 'Koordiniramo pravne, financijske i operativne korake do prijenosa.', detail: 'Proces ostaje organiziran do zadnjeg potpisa.' },
 ]
 
+const principles = [
+    'Diskrecija prije dosega',
+    'Kvaliteta interesa prije volumena',
+    'Jasna struktura prije pregovora',
+]
+
 export default function SellPage() {
     return (
         <div className="min-h-screen">
@@ -61,11 +67,11 @@ export default function SellPage() {
                                 Heritance kombinira indikativnu procjenu, anonimno pozicioniranje, provjerene kupce i savjetnika koji zna kada ubrzati, a kada zaštititi mir vlasnika.
                             </motion.p>
                             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
-                                <Link href="/valuate" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg gradient-gold text-navy-950 font-bold shadow-lg transition-all hover:-translate-y-0.5">
+                                <Link href="/valuate" className="cta-primary cta-primary-gold px-8 py-4 hover:-translate-y-0.5 hover:shadow-lg">
                                     Pokrenite procjenu
                                     <TrendingUp className="w-5 h-5" />
                                 </Link>
-                                <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg border border-white/20 text-white font-bold hover:bg-white/10 transition-all">
+                                <Link href="/contact" className="cta-secondary px-8 py-4 border-white/20 text-white hover:bg-white/10">
                                     Povjerljiv razgovor
                                     <ArrowRight className="w-5 h-5" />
                                 </Link>
@@ -94,11 +100,22 @@ export default function SellPage() {
 
             <section className="py-20 bg-white">
                 <div className="section-shell">
-                    <div className="text-center max-w-3xl mx-auto mb-14">
-                        <p className="eyebrow mb-4">Zašto Heritance</p>
-                        <h2 className="text-3xl md:text-4xl font-bold text-navy-950">
-                            Proces koji čuva vrijednost i reputaciju.
-                        </h2>
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-8 items-start mb-12">
+                        <div>
+                            <p className="eyebrow mb-4">Zašto Heritance</p>
+                            <h2 className="text-3xl md:text-4xl font-bold text-navy-950 mb-4">
+                                Proces koji čuva vrijednost i reputaciju.
+                            </h2>
+                            <p className="text-navy-600 font-sans max-w-2xl">
+                                Prodaja tvrtke je osjetljiv trenutak za vlasnika, tim i tržište. Zato vodimo proces s jasnim pravilima informiranja i pregovaranja.
+                            </p>
+                        </div>
+                        <blockquote className="premium-card p-6 md:p-7 border-l-4 border-l-gold-500">
+                            <p className="text-lg text-navy-900 font-display leading-relaxed">
+                                “Najveća vrijednost transakcije često nestane kad proces izgubi red. Naš posao je da red ostane jači od pritiska.”
+                            </p>
+                            <footer className="mt-4 text-sm text-navy-500 font-sans">Heritance savjetnički tim</footer>
+                        </blockquote>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {benefits.map((benefit) => {
@@ -148,6 +165,16 @@ export default function SellPage() {
                             )
                         })}
                     </div>
+                    <div className="mt-10 premium-card p-6 md:p-7">
+                        <p className="text-xs font-bold uppercase tracking-wider text-navy-500 mb-4">Načela mandata</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            {principles.map((item) => (
+                                <div key={item} className="rounded-lg border border-navy-100 bg-white px-4 py-3 text-sm font-semibold text-navy-700">
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -160,7 +187,7 @@ export default function SellPage() {
                     <p className="text-lg text-muted-foreground mb-9 font-sans">
                         Procjena traje nekoliko minuta i ne pokreće javni proces prodaje.
                     </p>
-                    <Link href="/valuate" className="inline-flex items-center gap-2 px-9 py-4 rounded-lg gradient-gold text-navy-950 font-bold shadow-lg transition-all hover:-translate-y-0.5">
+                    <Link href="/valuate" className="cta-primary cta-primary-gold px-9 py-4 hover:-translate-y-0.5 hover:shadow-lg">
                         Start procjene
                         <ArrowRight className="w-5 h-5" />
                     </Link>
