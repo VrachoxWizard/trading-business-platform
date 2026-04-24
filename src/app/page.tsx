@@ -1,9 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import ProcessTimeline from '@/components/ProcessTimeline'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
+import DealMarquee from '@/components/DealMarquee'
+import CroatiaDealNetwork from '@/components/CroatiaDealNetwork'
 import {
   TrendingUp,
   Shield,
@@ -130,217 +133,115 @@ const testimonials = [
 export default function HomePage() {
   return (
     <>
-      {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center gradient-hero overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 right-10 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-20 left-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-600/5 rounded-full blur-3xl" />
+      {/* HERO SECTION - Premium Full-Screen Background Image */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-20 pb-24">
+
+        {/* Background Image Container */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero_croatian_owner.png"
+            alt="Croatian small business owner reviewing documents in his artisanal shop"
+            fill
+            priority
+            className="object-cover object-center lg:object-[60%_50%] scale-105"
+            sizes="100vw"
+            quality={90}
+          />
+
+          {/* Subtle slow motion scale-in (we add it to an overlay pseudo to avoid blurring during transition in some browsers, but Next Image is fine wrapping) */}
+          <style dangerouslySetInnerHTML={{
+            __html: `
+            .bg-slow-zoom img {
+              animation: slowZoom 25s ease-out forwards;
+            }
+            @keyframes slowZoom {
+              from { transform: scale(1.05); }
+              to { transform: scale(1); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .bg-slow-zoom img { animation: none; transform: scale(1); }
+            }
+          `}} />
+
+          {/* Overlays for contrast and emotion */}
+          {/* Desktop: Dark left, fading out right to reveal the environment */}
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-900/10 hidden lg:block" />
+
+          {/* Mobile: Consistent dark overlay for readable text */}
+          <div className="absolute inset-0 bg-navy-950/80 lg:hidden" />
+
+          {/* Bottom fade into the page body */}
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy-950 via-navy-950/80 to-transparent" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40">
-          <motion.div
-            initial="initial"
-            animate="animate"
-            variants={stagger}
-            className="max-w-3xl"
-          >
-            <motion.div variants={fadeIn} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-gold-400 border border-white/10 backdrop-blur-sm">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                Now serving Croatian M&A market
-              </span>
-            </motion.div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-12 sm:mt-0">
+          <div className="max-w-2xl lg:max-w-3xl">
 
-            <motion.h1 variants={fadeIn} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6">
-              Sell or acquire a business with{' '}
-              <span className="text-gradient">AI-powered</span>{' '}
-              confidence
-            </motion.h1>
-
-            <motion.p variants={fadeIn} className="text-lg md:text-xl text-navy-200 mb-10 max-w-2xl leading-relaxed">
-              The premium M&A advisory platform for micro and small businesses.
-              Get a free AI valuation in 5 minutes, connect with verified buyers,
-              and close with expert guidance.
-            </motion.p>
-
-            <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/valuate"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl gradient-gold text-navy-950 font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02]"
-              >
-                <TrendingUp className="w-5 h-5" />
-                Free Valuation
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link
-                href="/listings"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border-2 border-white/20 text-white font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-sm"
-              >
-                <Search className="w-5 h-5" />
-                Browse Deals
-              </Link>
-            </motion.div>
-
-            <motion.div variants={fadeIn} className="mt-12 flex items-center gap-8 text-sm text-navy-300">
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-gold-400" />
-                <span>5-minute valuation</span>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              {/* Badge */}
+              <div className="mb-6">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />
+                  Built for Croatian small business owners
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-gold-400" />
-                <span>100% confidential</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-gold-400" />
-                <span>Free to start</span>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* PERSONA SELECTORS */}
-      <section className="py-32 bg-white relative overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-navy-200 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="text-center mb-20"
-          >
-            <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-bold text-navy-950 mb-6 tracking-tight">
-              A Platform Built for You
-            </motion.h2>
-            <motion.p variants={fadeIn} className="text-navy-500 text-lg md:text-xl max-w-2xl mx-auto">
-              DealFlow serves every stakeholder in the M&A process with tailored tools and elite experiences.
-            </motion.p>
-          </motion.div>
+              {/* Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.05] mb-6 tracking-tight drop-shadow-lg">
+                Your business has value. <span className="text-gold-400">Let’s make it clear.</span>
+              </h1>
 
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {personas.map((p, i) => {
-              const Icon = p.icon
-              const isCenter = i === 1
-              return (
-                <motion.div
-                  key={p.title}
-                  variants={fadeIn}
-                  className={`group relative rounded-3xl p-8 sm:p-10 transition-all duration-500 hover:-translate-y-2 overflow-hidden ${isCenter
-                      ? 'bg-navy-950 text-white shadow-2xl ring-1 ring-white/10'
-                      : 'bg-white text-navy-950 shadow-card border border-navy-100 hover:shadow-elevated hover:border-accent-200'
-                    }`}
+              {/* Subheadline */}
+              <p className="text-lg lg:text-xl text-white/90 mb-10 max-w-xl leading-relaxed font-light drop-shadow-md">
+                DealFlow helps Croatian small-business owners understand their valuation, prepare for sale, and connect with serious buyers — privately and professionally.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                <Link
+                  href="/valuate"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gold-500 text-navy-950 font-bold text-lg transition-transform hover:-translate-y-0.5 hover:shadow-[0_10px_40px_rgba(212,168,83,0.4)] focus:outline-none focus:ring-4 focus:ring-gold-500/50"
+                  aria-label="Get a free business valuation"
                 >
-                  {/* Subtle hover gradient background */}
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${isCenter ? 'from-accent-500/10 to-transparent' : 'from-accent-50/50 to-transparent'
-                    }`} />
-
-                  <div className="relative z-10">
-                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110 shadow-lg ${isCenter ? 'bg-gradient-to-br from-accent-500 to-accent-600' : 'bg-gradient-to-br ' + p.color
-                      }`}>
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">{p.title}</h3>
-                    <p className={`mb-8 leading-relaxed text-lg ${isCenter ? 'text-navy-300' : 'text-navy-500'
-                      }`}>{p.desc}</p>
-
-                    <Link
-                      href={p.href}
-                      className={`inline-flex items-center justify-between w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 ${isCenter
-                          ? 'bg-white/5 hover:bg-white/10 text-white'
-                          : 'bg-navy-50 hover:bg-accent-50 text-accent-700 hover:text-accent-800'
-                        }`}
-                    >
-                      {p.cta}
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FEATURES GRID - Bento Box */}
-      <section className="py-32 bg-navy-50 border-t border-navy-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="text-center mb-20"
-          >
-            <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-bold text-navy-950 mb-6 tracking-tight">
-              Engineered for Alpha
-            </motion.h2>
-            <motion.p variants={fadeIn} className="text-navy-500 text-lg md:text-xl max-w-2xl mx-auto">
-              We combine proprietary AI technology with human brokerage expertise to deliver the most efficient transaction experience.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[240px]"
-          >
-            {features.map((f, i) => {
-              const Icon = f.icon
-
-              // Define bento grid layout classes
-              const bentoClasses = [
-                "md:col-span-2 md:row-span-2 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 text-white shadow-2xl relative overflow-hidden",
-                "md:col-span-1 md:row-span-1 bg-white border border-navy-100 shadow-sm",
-                "md:col-span-1 md:row-span-2 bg-gradient-to-b from-white to-navy-50/50 border border-navy-100 shadow-sm",
-                "md:col-span-1 md:row-span-1 bg-white border border-navy-100 shadow-sm",
-                "md:col-span-2 md:row-span-1 bg-white border border-navy-100 shadow-sm",
-                "md:col-span-2 md:row-span-1 bg-gradient-to-br from-accent-600 to-accent-700 text-white shadow-lg overflow-hidden relative",
-              ]
-
-              const isDark = i === 0 || i === 5
-
-              return (
-                <motion.div
-                  key={f.title}
-                  variants={fadeIn}
-                  className={`rounded-3xl p-8 hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-between ${bentoClasses[i]}`}
+                  Get free valuation
+                </Link>
+                <Link
+                  href="#how-it-works"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-navy-900/40 backdrop-blur-md text-white font-semibold text-lg border border-white/20 transition-colors hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-white/20"
+                  aria-label="Talk to our advisory team"
                 >
-                  {/* Decorative background accents for dark cards */}
-                  {i === 0 && <div className="absolute top-0 right-0 w-64 h-64 bg-accent-500/20 blur-3xl rounded-full" />}
-                  {i === 5 && <div className="absolute bottom-[-10%] right-[-10%] w-40 h-40 bg-gold-400/30 blur-2xl rounded-full" />}
+                  Talk to an advisor
+                </Link>
+              </div>
 
-                  <div className="relative z-10">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm ${isDark ? 'bg-white/10 border border-white/20' : 'bg-navy-50'
-                      }`}>
-                      <Icon className={`w-7 h-7 ${isDark ? 'text-white' : 'text-accent-600'}`} />
-                    </div>
-                    <h3 className={`text-2xl font-bold mb-3 ${isDark ? 'text-white' : 'text-navy-950'}`}>{f.title}</h3>
-                    <p className={`text-base leading-relaxed ${isDark ? 'text-navy-200' : 'text-navy-600'}`}>{f.desc}</p>
-                  </div>
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-semibold text-white/80 uppercase tracking-wider backdrop-blur-sm bg-navy-950/20 w-max px-4 py-2.5 rounded-lg border border-white/5">
+                <div className="flex items-center gap-1.5">
+                  <Lock className="w-3.5 h-3.5 text-gold-400" />
+                  100% confidential
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
+                  Verified buyers
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Handshake className="w-3.5 h-3.5 text-blue-400" />
+                  Advisor-guided
+                </div>
+              </div>
 
-                  {/* Large cards get an extra CTA link at bottom */}
-                  {i === 0 && (
-                    <div className="mt-8 relative z-10 flex items-center text-accent-400 font-semibold cursor-pointer group">
-                      Try Valuator Tool <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  )}
-                </motion.div>
-              )
-            })}
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
+
+      <CroatiaDealNetwork />
+
+      <DealMarquee />
 
       {/* PROCESS TIMELINE — Cinematic Vertical Canvas */}
       <section className="py-32 bg-navy-950 overflow-hidden relative">
@@ -393,7 +294,7 @@ export default function HomePage() {
               Trusted by Business Owners
             </motion.h2>
             <motion.p variants={fadeIn} className="text-navy-300 text-lg md:text-xl max-w-2xl mx-auto">
-              Real outcomes from real transactions guided by DealFlow.
+              Stories from sellers, buyers, and advisors who moved through the deal process with clarity and confidence.
             </motion.p>
           </motion.div>
 
