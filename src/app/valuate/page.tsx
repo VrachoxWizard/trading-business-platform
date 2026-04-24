@@ -487,7 +487,7 @@ Napomena: Ovo je isključivo indikativna procjena temeljna na vlastitoj procjeni
     )
 }
 
-function SectionTitle({ icon: Icon, title, desc }: { icon: ElementType; title: string; desc: string }) {
+function SectionTitle({ icon: Icon, title, desc }: { icon: any; title: string; desc: string }) {
     return (
         <div className="flex items-center gap-4 mb-2">
             <div className="w-12 h-12 rounded-lg bg-navy-50 border border-navy-100 flex items-center justify-center shrink-0 shadow-sm">
