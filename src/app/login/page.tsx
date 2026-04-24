@@ -50,13 +50,13 @@ function LoginForm() {
                     </Link>
                 </div>
 
-                <div className="glass p-7 md:p-8 rounded-lg shadow-elevated">
-                    <div className="flex rounded-lg bg-navy-50 p-1 mb-8">
+                <div className="premium-card p-8 md:p-10 rounded-2xl shadow-2xl border-white/20">
+                    <div className="flex rounded-lg bg-navy-50 p-1 mb-8 border border-navy-100 shadow-inner">
                         <button
                             type="button"
                             onClick={() => setMode('login')}
                             className={`flex-1 py-2.5 rounded-md text-sm font-bold transition-all ${mode === 'login'
-                                ? 'bg-white text-navy-950 shadow-sm'
+                                ? 'bg-white text-navy-950 shadow-sm border border-navy-100'
                                 : 'text-navy-500 hover:text-navy-700'
                                 }`}
                         >
@@ -66,7 +66,7 @@ function LoginForm() {
                             type="button"
                             onClick={() => setMode('signup')}
                             className={`flex-1 py-2.5 rounded-md text-sm font-bold transition-all ${mode === 'signup'
-                                ? 'bg-white text-navy-950 shadow-sm'
+                                ? 'bg-white text-navy-950 shadow-sm border border-navy-100'
                                 : 'text-navy-500 hover:text-navy-700'
                                 }`}
                         >
@@ -74,15 +74,15 @@ function LoginForm() {
                         </button>
                     </div>
 
-                    <div className="mb-6">
-                        <p className="eyebrow mb-4">
+                    <div className="mb-8 text-center">
+                        <p className="eyebrow mb-4 justify-center">
                             <Shield className="w-3.5 h-3.5" />
                             Povjerljiv pristup
                         </p>
-                        <h1 className="text-2xl font-bold text-navy-950 mb-2">
+                        <h1 className="text-3xl font-display font-bold text-navy-950 mb-3 tracking-tight">
                             {mode === 'login' ? 'Dobro došli natrag' : 'Otvorite Heritance račun'}
                         </h1>
-                        <p className="text-navy-500 text-sm font-sans">
+                        <p className="text-navy-500 text-sm font-sans max-w-xs mx-auto">
                             {mode === 'login'
                                 ? 'Pristupite svojim razgovorima, NDA zahtjevima i nadzornoj ploči.'
                                 : 'Kreirajte profil kupca ili prodavatelja za povjerljiv rad s prilikama.'}

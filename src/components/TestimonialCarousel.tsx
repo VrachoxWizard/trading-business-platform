@@ -94,7 +94,7 @@ export default function TestimonialCarousel() {
                             </div>
                         </div>
 
-                        <p className="text-2xl md:text-3xl font-display font-bold text-navy-950 leading-snug mb-8">
+                        <p className="text-2xl md:text-4xl font-display font-bold text-navy-950 leading-[1.15] tracking-tight mb-10">
                             “{current.quote}”
                         </p>
 

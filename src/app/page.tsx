@@ -124,7 +124,7 @@ export default function HomePage() {
               </span>
             </motion.div>
 
-            <motion.h1 variants={fadeIn} className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.06] mb-6">
+            <motion.h1 variants={fadeIn} className="text-4xl sm:text-5xl lg:text-7xl font-display font-bold text-white leading-[1.06] mb-6 tracking-tight">
               Diskretna prodaja tvrtke, bez gubitka kontrole.
             </motion.h1>
 
@@ -168,7 +168,7 @@ export default function HomePage() {
         <div className="section-shell">
           <div className="max-w-3xl mx-auto text-center mb-14">
             <p className="eyebrow mb-4">Tri publike, jedan povjerljiv proces</p>
-            <h2 className="text-3xl md:text-5xl font-bold text-navy-950 mb-4">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-navy-950 mb-4 tracking-tight">
               Platforma za trenutke kada posao postaje osoban.
             </h2>
             <p className="text-lg text-muted-foreground font-sans">
@@ -201,7 +201,7 @@ export default function HomePage() {
         <div className="section-shell">
           <div className="max-w-3xl mx-auto text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-wider text-gold-400 mb-4">Transakcije bez improvizacije</p>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4 tracking-tight">
               Sve što treba za ozbiljan, ali tih izlazak na tržište.
             </h2>
             <p className="text-lg text-navy-300 font-sans">
@@ -230,7 +230,7 @@ export default function HomePage() {
         <div className="section-shell max-w-5xl">
           <div className="text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-wider text-gold-400 mb-4">Proces</p>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-5">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-5 tracking-tight">
               Od prve procjene do prijenosa vlasništva.
             </h2>
             <p className="text-lg text-navy-300 font-sans max-w-2xl mx-auto">
@@ -254,7 +254,7 @@ export default function HomePage() {
         <div className="section-shell">
           <div className="text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-wider text-gold-400 mb-4">Povjerenje</p>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-5">
+            <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-5 tracking-tight">
               Osjećaj kontrole u procesu koji je rijetko lagan.
             </h2>
             <p className="text-lg text-navy-300 font-sans max-w-2xl mx-auto">
@@ -269,7 +269,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <p className="eyebrow mb-4">Heritance nasuprot klasičnom pristupu</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-navy-950 mb-4">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-navy-950 mb-4 tracking-tight">
               Manje izlaganja, više strukture.
             </h2>
           </div>
@@ -308,7 +308,7 @@ export default function HomePage() {
       <section className="py-24 gradient-hero">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-xs font-bold uppercase tracking-wider text-gold-400 mb-4">Prvi korak može ostati potpuno privatan</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6 tracking-tight">
             Saznajte gdje stojite prije nego išta najavite.
           </h2>
           <p className="text-lg text-navy-200 mb-10 max-w-2xl mx-auto font-sans">

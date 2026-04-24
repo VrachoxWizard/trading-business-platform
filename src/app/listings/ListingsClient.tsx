@@ -292,23 +292,23 @@ export default function ListingsClient({ listings }: { listings: Listing[] }) {
                         ))}
                     </div>
                 ) : (
-                    <div className="premium-card p-12 md:p-16 text-center">
-                        <div className="w-16 h-16 rounded-lg bg-navy-50 flex items-center justify-center mx-auto mb-6">
-                            <BarChart3 className="w-8 h-8 text-navy-400" />
+                    <div className="premium-card relative p-12 md:p-20 text-center overflow-hidden border-dashed border-2 border-navy-200">
+                        <div className="w-20 h-20 rounded-2xl bg-navy-50 border border-navy-100 flex items-center justify-center mx-auto mb-6 shadow-sm">
+                            <BarChart3 className="w-8 h-8 text-gold-600" />
                         </div>
-                        <h3 className="text-2xl font-bold text-navy-950 mb-2">Trenutno nema prikazanih prilika</h3>
-                        <p className="text-navy-500 mb-7 max-w-xl mx-auto font-sans">
+                        <h3 className="text-2xl md:text-3xl font-display font-bold text-navy-950 mb-3">Trenutno nema prikazanih prilika</h3>
+                        <p className="text-navy-500 text-lg mb-8 max-w-xl mx-auto font-sans">
                             {activeFilters > 0
-                                ? 'Pokušajte proširiti filtere ili se javite kako bismo evidentirali profil interesa.'
-                                : 'Aktivne prilike prikazat će se ovdje nakon provjere i odobrenja za anonimni prikaz.'}
+                                ? 'Niti jedna prilika ne odgovara vašim filterima. Pokušajte proširiti kriterije ili zabilježite svoj profil interesa kako bismo vas obavijestili.'
+                                : 'Naše transakcije vode se strogo povjerljivo. Javite nam svoj investicijski fokus kako biste dobili ekskluzivan pristup novim prilikama.'}
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3 justify-center">
                             {activeFilters > 0 && (
-                                <button onClick={clearFilters} className="px-6 py-3 rounded-lg gradient-accent text-white font-bold text-sm">
+                                <button onClick={clearFilters} className="px-6 py-3.5 rounded-lg border border-navy-200 text-navy-700 font-bold text-sm hover:bg-navy-50 transition-all">
                                     Očisti filtere
                                 </button>
                             )}
-                            <Link href="/contact" className="px-6 py-3 rounded-lg border border-navy-200 text-navy-700 font-bold text-sm hover:bg-navy-50 transition-all">
+                            <Link href="/contact" className="px-6 py-3.5 rounded-lg gradient-gold text-navy-950 font-bold text-sm shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
                                 Zabilježite profil interesa
                             </Link>
                         </div>

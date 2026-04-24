@@ -1,0 +1,33 @@
+Image with src "/images/hero_croatian_owner.png" is using quality "90" which is not configured in images.qualities [75]. Please update your config to [75, 90].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Image with src "/images/hero_croatian_owner.png" is using quality "90" which is not configured in images.qualities [75]. Please update your config to [75, 90].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/images/tech.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/images/manufacturing.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/images/hospitality.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[browser] Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)

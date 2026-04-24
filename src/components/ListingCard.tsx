@@ -48,7 +48,7 @@ export default function ListingCard({
                     </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-navy-950 mb-2 group-hover:text-gold-700 transition-colors line-clamp-2">
+                <h3 className="text-xl font-display font-bold text-navy-950 mb-2 group-hover:text-gold-700 transition-colors line-clamp-2 leading-snug tracking-tight">
                     {title}
                 </h3>
 

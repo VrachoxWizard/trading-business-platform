@@ -66,7 +66,7 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${solidHeader
-                ? 'glass shadow-md py-3'
+                ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-sm py-3'
                 : 'bg-transparent py-5'
                 }`}
         >
@@ -91,8 +91,8 @@ export default function Header() {
                                     key={item.href}
                                     href={item.href}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${active
-                                        ? 'bg-gold-600 text-white shadow-sm'
-                                        : `${navText} hover:bg-white/70 hover:text-navy-950`
+                                        ? 'bg-navy-950 text-white shadow-sm'
+                                        : `${navText} hover:bg-black/5 hover:text-navy-950`
                                         }`}
                                 >
                                     <Icon className="w-4 h-4" />
@@ -151,7 +151,7 @@ export default function Header() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="lg:hidden glass border-t border-navy-100 mt-3"
+                        className="lg:hidden bg-background border-t border-border mt-3 shadow-md"
                     >
                         <div className="px-4 py-4 space-y-2">
                             {navItems.map((item) => {
@@ -163,8 +163,8 @@ export default function Header() {
                                         href={item.href}
                                         onClick={() => setIsOpen(false)}
                                         className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${active
-                                            ? 'bg-gold-600 text-white'
-                                            : 'text-navy-700 hover:bg-navy-50'
+                                            ? 'bg-navy-950 text-white'
+                                            : 'text-navy-700 hover:bg-black/5'
                                             }`}
                                     >
                                         <Icon className="w-5 h-5" />
