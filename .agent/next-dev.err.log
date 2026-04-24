@@ -31,3 +31,158 @@ Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
 [browser] Image with src "/images/hero_croatian_owner.png" is using quality "92" which is not configured in images.qualities [75]. Please update your config to [75, 92].
 Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
 [browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+Error: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [2m[at C:\Users\user1\Desktop\trading-business-platform\node_modules\tailwindcss\dist\lib.js:32:3856][0m
+    [2m[at Ur (C:\Users\user1\Desktop\trading-business-platform\node_modules\tailwindcss\dist\lib.js:3:1733)][0m
+    [2m[at I (C:\Users\user1\Desktop\trading-business-platform\node_modules\tailwindcss\dist\lib.js:3:1377)][0m
+    [2m[at vn (C:\Users\user1\Desktop\trading-business-platform\node_modules\tailwindcss\dist\lib.js:32:2712)][0m
+    [2m[at async kn (C:\Users\user1\Desktop\trading-business-platform\node_modules\tailwindcss\dist\lib.js:38:631)][0m
+    [2m[at async Xr (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\node\dist\index.js:10:3415)][0m
+    [2m[at async E (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:3979)][0m
+    [2m[at async Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:4831)][0m
+    [2m[at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)][0m
+    [2m[at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)][0m
+⨯ ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⨯ ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+[browser] Uncaught Error: ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⨯ ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+[browser] Uncaught Error: ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⨯ ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+[browser] Uncaught Error: ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+⨯ ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+[browser] Uncaught Error: ./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: C:\Users\user1\Desktop\trading-business-platform\src\app\globals.css:1:1: `@utility card-interactive:hover` defines an invalid utility name. Utilities should be alphanumeric and start with a lowercase letter.
+    [at Input.error (turbopack:///[project]/node_modules/postcss/lib/input.js:135:16)]
+    [at Root.error (turbopack:///[project]/node_modules/postcss/lib/node.js:146:32)]
+    [at Object.Once (C:\Users\user1\Desktop\trading-business-platform\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at async LazyResult.runAsync (turbopack:///[project]/node_modules/postcss/lib/lazy-result.js:293:11)]
+    [at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34)]
+    [at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23)]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
