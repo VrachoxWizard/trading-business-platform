@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { Suspense, useState } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { TrendingUp, Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react'
+import { ArrowRight, Eye, EyeOff, Lock, Mail, Shield } from 'lucide-react'
 import { login, signup } from './actions'
 
 function LoginForm() {
@@ -26,66 +26,71 @@ function LoginForm() {
                 await signup(formData)
             }
         } catch {
-            setError('An error occurred. Please try again.')
+            setError('Nešto nije uspjelo. Provjerite podatke i pokušajte ponovno.')
         } finally {
             setLoading(false)
         }
     }
 
     return (
-        <div className="min-h-screen gradient-hero flex items-center justify-center px-4 py-20">
+        <div className="min-h-screen gradient-hero flex items-center justify-center px-4 py-24">
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full max-w-md"
             >
-                {/* Logo */}
                 <div className="text-center mb-8">
                     <Link href="/" className="inline-flex items-center gap-2">
-                        <div className="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center shadow-lg">
-                            <TrendingUp className="w-6 h-6 text-white" />
+                        <div className="w-12 h-12 rounded-lg gradient-gold flex items-center justify-center shadow-lg">
+                            <span className="text-navy-950 font-display font-bold text-2xl leading-none">H</span>
                         </div>
-                        <span className="text-2xl font-bold text-white">
-                            Deal<span className="text-gold-500">Flow</span>
+                        <span className="text-2xl font-display font-bold text-white">
+                            Herit<span className="text-gold-400">ance</span>
                         </span>
                     </Link>
                 </div>
 
-                {/* Card */}
-                <div className="glass rounded-2xl p-8 shadow-elevated">
-                    {/* Mode toggle */}
-                    <div className="flex rounded-xl bg-navy-50 p-1 mb-8">
+                <div className="glass p-7 md:p-8 rounded-lg shadow-elevated">
+                    <div className="flex rounded-lg bg-navy-50 p-1 mb-8">
                         <button
+                            type="button"
                             onClick={() => setMode('login')}
-                            className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${mode === 'login'
+                            className={`flex-1 py-2.5 rounded-md text-sm font-bold transition-all ${mode === 'login'
                                 ? 'bg-white text-navy-950 shadow-sm'
                                 : 'text-navy-500 hover:text-navy-700'
                                 }`}
                         >
-                            Sign In
+                            Prijava
                         </button>
                         <button
+                            type="button"
                             onClick={() => setMode('signup')}
-                            className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${mode === 'signup'
+                            className={`flex-1 py-2.5 rounded-md text-sm font-bold transition-all ${mode === 'signup'
                                 ? 'bg-white text-navy-950 shadow-sm'
                                 : 'text-navy-500 hover:text-navy-700'
                                 }`}
                         >
-                            Create Account
+                            Novi račun
                         </button>
                     </div>
 
-                    <h2 className="text-2xl font-bold text-navy-950 mb-2">
-                        {mode === 'login' ? 'Welcome back' : 'Join Heritance'}
-                    </h2>
-                    <p className="text-navy-500 text-sm mb-6">
-                        {mode === 'login'
-                            ? 'Sign in to access your deals and dashboard.'
-                            : 'Create an account to start buying or selling businesses.'}
-                    </p>
+                    <div className="mb-6">
+                        <p className="eyebrow mb-4">
+                            <Shield className="w-3.5 h-3.5" />
+                            Povjerljiv pristup
+                        </p>
+                        <h1 className="text-2xl font-bold text-navy-950 mb-2">
+                            {mode === 'login' ? 'Dobro došli natrag' : 'Otvorite Heritance račun'}
+                        </h1>
+                        <p className="text-navy-500 text-sm font-sans">
+                            {mode === 'login'
+                                ? 'Pristupite svojim razgovorima, NDA zahtjevima i nadzornoj ploči.'
+                                : 'Kreirajte profil kupca ili prodavatelja za povjerljiv rad s prilikama.'}
+                        </p>
+                    </div>
 
                     {error && (
-                        <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm mb-6">
+                        <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm mb-6">
                             {error}
                         </div>
                     )}
@@ -93,23 +98,23 @@ function LoginForm() {
                     <form action={handleSubmit} className="space-y-5">
                         {mode === 'signup' && (
                             <div>
-                                <label htmlFor="full_name" className="block text-sm font-medium text-navy-700 mb-1.5">
-                                    Full Name
+                                <label htmlFor="full_name" className="block text-sm font-bold text-navy-700 mb-1.5">
+                                    Ime i prezime
                                 </label>
                                 <input
                                     id="full_name"
                                     name="full_name"
                                     type="text"
                                     required
-                                    className="w-full px-4 py-3 rounded-xl border border-navy-200 bg-white text-navy-950 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all"
-                                    placeholder="Your full name"
+                                    className="field-shell"
+                                    placeholder="Vaše ime"
                                 />
                             </div>
                         )}
 
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-navy-700 mb-1.5">
-                                Email Address
+                            <label htmlFor="email" className="block text-sm font-bold text-navy-700 mb-1.5">
+                                Email adresa
                             </label>
                             <div className="relative">
                                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-navy-400" />
@@ -118,15 +123,15 @@ function LoginForm() {
                                     name="email"
                                     type="email"
                                     required
-                                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-navy-200 bg-white text-navy-950 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all"
-                                    placeholder="you@company.com"
+                                    className="field-shell pl-10"
+                                    placeholder="ime@tvrtka.hr"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-navy-700 mb-1.5">
-                                Password
+                            <label htmlFor="password" className="block text-sm font-bold text-navy-700 mb-1.5">
+                                Lozinka
                             </label>
                             <div className="relative">
                                 <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-navy-400" />
@@ -136,13 +141,14 @@ function LoginForm() {
                                     type={showPassword ? 'text' : 'password'}
                                     required
                                     minLength={6}
-                                    className="w-full pl-10 pr-12 py-3 rounded-xl border border-navy-200 bg-white text-navy-950 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all"
-                                    placeholder="••••••••"
+                                    className="field-shell pl-10 pr-12"
+                                    placeholder="Najmanje 6 znakova"
                                 />
                                 <button
                                     type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
+                                    onClick={() => setShowPassword((visible) => !visible)}
                                     className="absolute right-3.5 top-1/2 -translate-y-1/2 text-navy-400 hover:text-navy-600"
+                                    aria-label={showPassword ? 'Sakrij lozinku' : 'Prikaži lozinku'}
                                 >
                                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                 </button>
@@ -151,16 +157,12 @@ function LoginForm() {
 
                         {mode === 'signup' && (
                             <div>
-                                <label htmlFor="role" className="block text-sm font-medium text-navy-700 mb-1.5">
-                                    I am a...
+                                <label htmlFor="role" className="block text-sm font-bold text-navy-700 mb-1.5">
+                                    Primarna uloga
                                 </label>
-                                <select
-                                    id="role"
-                                    name="role"
-                                    className="w-full px-4 py-3 rounded-xl border border-navy-200 bg-white text-navy-950 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all"
-                                >
-                                    <option value="buyer">Buyer / Investor</option>
-                                    <option value="seller">Business Owner (Seller)</option>
+                                <select id="role" name="role" className="field-shell">
+                                    <option value="buyer">Kupac / investitor</option>
+                                    <option value="seller">Vlasnik tvrtke</option>
                                 </select>
                             </div>
                         )}
@@ -168,13 +170,13 @@ function LoginForm() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl gradient-accent text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg gradient-accent text-white font-bold text-sm shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl disabled:opacity-50"
                         >
                             {loading ? (
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                             ) : (
                                 <>
-                                    {mode === 'login' ? 'Sign In' : 'Create Account'}
+                                    {mode === 'login' ? 'Prijavite se' : 'Kreirajte račun'}
                                     <ArrowRight className="w-4 h-4" />
                                 </>
                             )}
@@ -183,18 +185,18 @@ function LoginForm() {
 
                     {mode === 'login' && (
                         <p className="text-center text-sm text-navy-500 mt-4">
-                            <button className="text-accent-600 hover:text-accent-700 font-medium">
-                                Forgot password?
+                            <button type="button" className="text-gold-700 hover:text-gold-600 font-bold">
+                                Zaboravljena lozinka?
                             </button>
                         </p>
                     )}
                 </div>
 
                 <p className="text-center text-sm text-navy-300 mt-6">
-                    By continuing, you agree to Heritance&apos;s{' '}
-                    <Link href="#" className="text-gold-400 hover:text-gold-300">Terms</Link>{' '}
-                    and{' '}
-                    <Link href="#" className="text-gold-400 hover:text-gold-300">Privacy Policy</Link>.
+                    Nastavkom prihvaćate Heritance{' '}
+                    <Link href="#" className="text-gold-400 hover:text-gold-300">uvjete</Link>{' '}
+                    i{' '}
+                    <Link href="#" className="text-gold-400 hover:text-gold-300">pravila privatnosti</Link>.
                 </p>
             </motion.div>
         </div>

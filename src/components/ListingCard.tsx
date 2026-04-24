@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { MapPin, Users, ArrowRight, Lock } from 'lucide-react'
-import { formatCurrency } from '@/lib/utils'
+import { ArrowRight, Lock, MapPin, Users } from 'lucide-react'
 import { LISTING_STATUSES } from '@/lib/constants'
+import { formatCurrency } from '@/lib/utils'
 
 interface ListingCardProps {
     id: string
@@ -26,92 +26,77 @@ export default function ListingCard({
     ebitda,
     askingPrice,
     employeeCount,
-    isAnonymous = true,
 }: ListingCardProps) {
     const statusConfig = LISTING_STATUSES[status] || LISTING_STATUSES.active
 
     return (
-        <div className="bg-white rounded-[8px] shadow-card border border-[var(--border)] hover:shadow-elevated hover:border-gold-600/30 transition-all group overflow-hidden">
-            {/* Top Bar */}
-            <div className="px-6 pt-5 pb-4 border-b border-[var(--border)]">
+        <div className="premium-card hover:shadow-elevated hover:border-gold-600/30 transition-all group overflow-hidden">
+            <div className="px-6 pt-5 pb-4 border-b border-navy-100">
                 <div className="flex items-start justify-between gap-3 mb-3">
-                    {/* Sector Badge */}
-                    <span className="inline-flex items-center px-3 py-1 rounded-[999px] text-xs font-semibold bg-navy-50 text-navy-700 font-sans">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-navy-50 text-navy-700 font-sans">
                         {industry}
                     </span>
-                    {/* Status */}
                     <span
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[999px] text-xs font-semibold font-sans"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold font-sans"
                         style={{
                             backgroundColor: `${statusConfig.color}15`,
                             color: statusConfig.color,
                         }}
                     >
-                        <span
-                            className="w-1.5 h-1.5 rounded-full"
-                            style={{ backgroundColor: statusConfig.color }}
-                        />
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: statusConfig.color }} />
                         {statusConfig.label}
                     </span>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-bold text-navy-950 mb-2 group-hover:text-gold-600 transition-colors line-clamp-2">
-                    {isAnonymous ? title : title}
+                <h3 className="text-lg font-bold text-navy-950 mb-2 group-hover:text-gold-700 transition-colors line-clamp-2">
+                    {title}
                 </h3>
 
-                {/* Region */}
-                <div className="flex items-center gap-1.5 text-sm text-[var(--muted-foreground)] font-sans">
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground font-sans">
                     <MapPin className="w-3.5 h-3.5" />
                     {region}
                 </div>
             </div>
 
-            {/* Financials */}
             <div className="px-6 py-4">
                 <div className="grid grid-cols-3 gap-4">
-                    <div>
-                        <p className="text-xs text-[var(--muted-foreground)] font-sans mb-1">Revenue</p>
-                        <p className="text-sm font-bold text-navy-950 font-mono">
-                            {revenue ? formatCurrency(revenue) : '—'}
-                        </p>
-                    </div>
-                    <div>
-                        <p className="text-xs text-[var(--muted-foreground)] font-sans mb-1">EBITDA</p>
-                        <p className="text-sm font-bold text-navy-950 font-mono">
-                            {ebitda ? formatCurrency(ebitda) : '—'}
-                        </p>
-                    </div>
-                    <div>
-                        <p className="text-xs text-[var(--muted-foreground)] font-sans mb-1">Asking Price</p>
-                        <p className="text-sm font-bold text-gold-600 font-mono">
-                            {askingPrice ? formatCurrency(askingPrice) : 'On Request'}
-                        </p>
-                    </div>
+                    <Metric label="Prihod" value={revenue ? formatCurrency(revenue) : '-'} />
+                    <Metric label="EBITDA" value={ebitda ? formatCurrency(ebitda) : '-'} />
+                    <Metric label="Cijena" value={askingPrice ? formatCurrency(askingPrice) : 'Na upit'} accent />
                 </div>
 
                 {employeeCount && (
-                    <div className="flex items-center gap-1.5 text-xs text-[var(--muted-foreground)] mt-3 font-sans">
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-3 font-sans">
                         <Users className="w-3.5 h-3.5" />
-                        {employeeCount} employees
+                        {employeeCount} zaposlenih
                     </div>
                 )}
             </div>
 
-            {/* CTAs */}
             <div className="px-6 pb-5 flex gap-3">
                 <Link
                     href={`/listings/${id}`}
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-navy-950 text-white font-semibold text-sm font-sans hover:bg-navy-800 transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-navy-950 text-white font-bold text-sm font-sans hover:bg-navy-800 transition-colors"
                 >
-                    View Details
+                    Detalji
                     <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
-                <button className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[var(--border)] text-navy-700 font-semibold text-sm font-sans hover:bg-navy-50 transition-colors">
+                <button className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-navy-200 text-navy-700 font-bold text-sm font-sans hover:bg-navy-50 transition-colors">
                     <Lock className="w-3.5 h-3.5" />
-                    Request NDA
+                    NDA
                 </button>
             </div>
+        </div>
+    )
+}
+
+function Metric({ label, value, accent = false }: { label: string; value: string; accent?: boolean }) {
+    return (
+        <div>
+            <p className="text-xs text-muted-foreground font-sans mb-1">{label}</p>
+            <p className={`text-sm font-bold font-mono ${accent ? 'text-gold-700' : 'text-navy-950'}`}>
+                {value}
+            </p>
         </div>
     )
 }

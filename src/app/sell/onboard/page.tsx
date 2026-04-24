@@ -1,16 +1,18 @@
 'use client'
 
 import { useState } from 'react'
+import type { ElementType } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
-    Building2,
-    DollarSign,
     BarChart3,
-    Eye,
+    Building2,
     CheckCircle2,
-    ChevronRight,
     ChevronLeft,
+    ChevronRight,
+    DollarSign,
+    Eye,
+    Lock,
     Sparkles,
 } from 'lucide-react'
 import { INDUSTRIES, REGIONS } from '@/lib/constants'
@@ -48,7 +50,12 @@ export default function OnboardPage() {
         setFormData((prev) => ({ ...prev, [field]: value }))
     }
 
-    const stepLabels = ['Basic Info', 'Financials', 'Details', 'Preview', 'Confirm']
+    const stepLabels = ['Osnovno', 'Financije', 'Kvaliteta', 'Pregled', 'Potvrda']
+
+    const canProceed = () => {
+        if (step === 1) return formData.title && formData.industry && formData.region
+        return true
+    }
 
     const handleSubmit = async () => {
         setLoading(true)
@@ -91,22 +98,27 @@ export default function OnboardPage() {
     }
 
     return (
-        <div className="min-h-screen bg-navy-50 pt-24">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="min-h-screen bg-background pt-24">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-navy-950 mb-2">List Your Business</h1>
-                    <p className="text-navy-500">Complete the form to create a confidential listing.</p>
+                    <p className="eyebrow mb-4">
+                        <Lock className="w-3.5 h-3.5" />
+                        Anonimni nacrt
+                    </p>
+                    <h1 className="text-3xl md:text-5xl font-bold text-navy-950 mb-3">Priprema prodajnog profila</h1>
+                    <p className="text-navy-500 font-sans max-w-2xl mx-auto">
+                        Profil se sprema kao nacrt. Savjetnik ga pregledava prije bilo kakvog prikaza kupcima.
+                    </p>
                 </div>
 
-                {/* Progress */}
                 <div className="mb-10">
                     <div className="flex items-center justify-between mb-3">
-                        {stepLabels.map((label, i) => (
-                            <div key={label} className="flex items-center gap-1">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${i + 1 <= step ? 'gradient-accent text-white' : 'bg-navy-100 text-navy-400'}`}>
-                                    {i + 1 < step ? <CheckCircle2 className="w-4 h-4" /> : i + 1}
+                        {stepLabels.map((label, index) => (
+                            <div key={label} className="flex items-center gap-2">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${index + 1 <= step ? 'gradient-accent text-white' : 'bg-navy-100 text-navy-400'}`}>
+                                    {index + 1 < step ? <CheckCircle2 className="w-4 h-4" /> : index + 1}
                                 </div>
-                                <span className="hidden sm:block text-xs text-navy-400">{label}</span>
+                                <span className="hidden sm:block text-xs font-bold text-navy-400">{label}</span>
                             </div>
                         ))}
                     </div>
@@ -115,177 +127,99 @@ export default function OnboardPage() {
                     </div>
                 </div>
 
-                <AnimatePresence mode="wait">
-                    <motion.div key={step} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }}>
-                        <div className="bg-white rounded-2xl shadow-card border border-navy-100 p-8">
+                <AnimatePresence mode="wait" initial={false}>
+                    <motion.div key={step} initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -18 }} transition={{ duration: 0.25 }}>
+                        <div className="premium-card p-6 md:p-8">
                             {step === 1 && (
                                 <div className="space-y-5">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-10 h-10 rounded-xl bg-accent-100 flex items-center justify-center">
-                                            <Building2 className="w-5 h-5 text-accent-600" />
-                                        </div>
-                                        <h2 className="text-xl font-bold text-navy-950">Basic Information</h2>
+                                    <StepHeading icon={Building2} title="Osnovni podaci" />
+                                    <TextInput label="Naziv profila *" value={formData.title} onChange={(value) => update('title', value)} placeholder="npr. Profitabilna proizvodna tvrtka u Zagrebu" />
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <SelectInput label="Industrija *" value={formData.industry} onChange={(value) => update('industry', value)} options={INDUSTRIES} placeholder="Odaberite" />
+                                        <SelectInput label="Regija *" value={formData.region} onChange={(value) => update('region', value)} options={REGIONS} placeholder="Odaberite" />
+                                    </div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <TextInput label="Grad" value={formData.city} onChange={(value) => update('city', value)} placeholder="Zagreb" />
+                                        <TextInput label="Godina osnivanja" value={formData.year_established} onChange={(value) => update('year_established', value)} placeholder="2010" type="number" />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium text-navy-700 mb-1.5">Listing Title *</label>
-                                        <input type="text" value={formData.title} onChange={(e) => update('title', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="e.g. Profitable SaaS Company in Zagreb" />
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">Industry *</label>
-                                            <select value={formData.industry} onChange={(e) => update('industry', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500">
-                                                <option value="">Select</option>
-                                                {INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">Region *</label>
-                                            <select value={formData.region} onChange={(e) => update('region', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500">
-                                                <option value="">Select</option>
-                                                {REGIONS.map((r) => <option key={r} value={r}>{r}</option>)}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">City</label>
-                                            <input type="text" value={formData.city} onChange={(e) => update('city', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="Zagreb" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">Year Established</label>
-                                            <input type="number" value={formData.year_established} onChange={(e) => update('year_established', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="2010" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-navy-700 mb-1.5">Business Description</label>
-                                        <textarea value={formData.description} onChange={(e) => update('description', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500 resize-none" rows={4} placeholder="Describe your business, operations, and key strengths..." />
+                                        <label className="block text-sm font-bold text-navy-700 mb-1.5">Opis poslovanja</label>
+                                        <textarea value={formData.description} onChange={(event) => update('description', event.target.value)} className="field-shell resize-none" rows={4} placeholder="Sažeto opišite poslovanje, kupce, snage i operativni model." />
                                     </div>
                                 </div>
                             )}
 
                             {step === 2 && (
                                 <div className="space-y-5">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-10 h-10 rounded-xl bg-gold-100 flex items-center justify-center">
-                                            <DollarSign className="w-5 h-5 text-gold-600" />
-                                        </div>
-                                        <h2 className="text-xl font-bold text-navy-950">Financial Data</h2>
+                                    <StepHeading icon={DollarSign} title="Financijski podaci" />
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <TextInput label="Godišnji prihod (€)" value={formData.revenue} onChange={(value) => update('revenue', value)} placeholder="500000" type="number" />
+                                        <TextInput label="EBITDA (€)" value={formData.ebitda} onChange={(value) => update('ebitda', value)} placeholder="100000" type="number" />
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">Annual Revenue (€)</label>
-                                            <input type="number" value={formData.revenue} onChange={(e) => update('revenue', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="500000" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">EBITDA (€)</label>
-                                            <input type="number" value={formData.ebitda} onChange={(e) => update('ebitda', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="100000" />
-                                        </div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <TextInput label="SDE (€)" value={formData.sde} onChange={(value) => update('sde', value)} placeholder="150000" type="number" />
+                                        <TextInput label="Tražena cijena (€)" value={formData.asking_price} onChange={(value) => update('asking_price', value)} placeholder="750000" type="number" />
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">SDE (€)</label>
-                                            <input type="number" value={formData.sde} onChange={(e) => update('sde', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="150000" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">Asking Price (€)</label>
-                                            <input type="number" value={formData.asking_price} onChange={(e) => update('asking_price', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="750000" />
-                                        </div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <TextInput label="Broj zaposlenih" value={formData.employee_count} onChange={(value) => update('employee_count', value)} placeholder="25" type="number" />
+                                        <TextInput label="Poslovni model" value={formData.business_model} onChange={(value) => update('business_model', value)} placeholder="B2B usluge, pretplata..." />
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">Employees</label>
-                                            <input type="number" value={formData.employee_count} onChange={(e) => update('employee_count', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="25" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-navy-700 mb-1.5">Business Model</label>
-                                            <input type="text" value={formData.business_model} onChange={(e) => update('business_model', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="B2B SaaS" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-navy-700 mb-1.5">Reason for Sale</label>
-                                        <input type="text" value={formData.reason_for_sale} onChange={(e) => update('reason_for_sale', e.target.value)} className="w-full px-4 py-3 rounded-xl border border-navy-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent-500" placeholder="Retirement, new venture, etc." />
-                                    </div>
+                                    <TextInput label="Razlog prodaje" value={formData.reason_for_sale} onChange={(value) => update('reason_for_sale', value)} placeholder="Sukcesija, novi projekt, partnerstvo..." />
                                 </div>
                             )}
 
                             {step === 3 && (
                                 <div className="space-y-6">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-10 h-10 rounded-xl bg-accent-100 flex items-center justify-center">
-                                            <BarChart3 className="w-5 h-5 text-accent-600" />
+                                    <StepHeading icon={BarChart3} title="Kvalitativni detalji" />
+                                    <RangeInput label="Ovisnost o vlasniku" value={formData.owner_dependence_score} onChange={(value) => update('owner_dependence_score', value)} desc="1 = poslovanje radi bez vlasnika, 10 = vlasnik je nezamjenjiv" />
+                                    <RangeInput label="Digitalna zrelost" value={formData.digital_maturity_score} onChange={(value) => update('digital_maturity_score', value)} desc="1 = minimalno digitalno, 10 = zreli digitalni procesi" />
+                                    <label className="flex items-start gap-3 cursor-pointer rounded-lg border border-navy-100 bg-navy-50 p-4">
+                                        <input type="checkbox" checked={formData.is_anonymous} onChange={(event) => update('is_anonymous', event.target.checked)} className="mt-1 w-5 h-5 rounded border-navy-300 accent-gold-600" />
+                                        <div>
+                                            <span className="text-sm font-bold text-navy-700">Prikaži anonimno</span>
+                                            <p className="text-xs text-navy-400 mt-1">Preporučeno. Identitet se ne otkriva prije provjere i NDA-a.</p>
                                         </div>
-                                        <h2 className="text-xl font-bold text-navy-950">Qualitative Details</h2>
-                                    </div>
-                                    <div>
-                                        <div className="flex justify-between mb-1.5">
-                                            <label className="text-sm font-medium text-navy-700">Owner Dependence</label>
-                                            <span className="text-sm font-bold text-accent-600">{formData.owner_dependence_score}/10</span>
-                                        </div>
-                                        <input type="range" min="1" max="10" value={formData.owner_dependence_score} onChange={(e) => update('owner_dependence_score', parseInt(e.target.value))} className="w-full accent-accent-600" />
-                                        <p className="text-xs text-navy-400 mt-1">1 = runs without owner, 10 = owner irreplaceable</p>
-                                    </div>
-                                    <div>
-                                        <div className="flex justify-between mb-1.5">
-                                            <label className="text-sm font-medium text-navy-700">Digital Maturity</label>
-                                            <span className="text-sm font-bold text-accent-600">{formData.digital_maturity_score}/10</span>
-                                        </div>
-                                        <input type="range" min="1" max="10" value={formData.digital_maturity_score} onChange={(e) => update('digital_maturity_score', parseInt(e.target.value))} className="w-full accent-accent-600" />
-                                        <p className="text-xs text-navy-400 mt-1">1 = no digital presence, 10 = full digital operations</p>
-                                    </div>
-                                    <div>
-                                        <label className="flex items-center gap-3 cursor-pointer">
-                                            <input type="checkbox" checked={formData.is_anonymous} onChange={(e) => update('is_anonymous', e.target.checked)} className="w-5 h-5 rounded border-navy-300 text-accent-600 focus:ring-accent-500" />
-                                            <div>
-                                                <span className="text-sm font-medium text-navy-700">List anonymously</span>
-                                                <p className="text-xs text-navy-400">Recommended. Your identity will be hidden until NDA is signed.</p>
-                                            </div>
-                                        </label>
-                                    </div>
+                                    </label>
                                 </div>
                             )}
 
                             {step === 4 && (
                                 <div className="space-y-6">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-10 h-10 rounded-xl bg-gold-100 flex items-center justify-center">
-                                            <Eye className="w-5 h-5 text-gold-600" />
+                                    <StepHeading icon={Eye} title="Pregled nacrta" />
+                                    <div className="bg-navy-50 rounded-lg p-6 space-y-4">
+                                        <h3 className="text-xl font-bold text-navy-950">{formData.title || 'Neimenovani profil'}</h3>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                                            <PreviewItem label="Industrija" value={formData.industry || '-'} />
+                                            <PreviewItem label="Regija" value={formData.region || '-'} />
+                                            <PreviewItem label="Prihod" value={formData.revenue ? `€${Number(formData.revenue).toLocaleString('de-DE')}` : '-'} />
+                                            <PreviewItem label="EBITDA" value={formData.ebitda ? `€${Number(formData.ebitda).toLocaleString('de-DE')}` : '-'} />
+                                            <PreviewItem label="Tražena cijena" value={formData.asking_price ? `€${Number(formData.asking_price).toLocaleString('de-DE')}` : '-'} />
+                                            <PreviewItem label="Zaposleni" value={formData.employee_count || '-'} />
                                         </div>
-                                        <h2 className="text-xl font-bold text-navy-950">Preview Your Listing</h2>
+                                        {formData.description && <p className="text-sm text-navy-500 font-sans">{formData.description}</p>}
                                     </div>
-                                    <div className="bg-navy-50 rounded-xl p-6 space-y-4">
-                                        <h3 className="text-lg font-bold text-navy-950">{formData.title || 'Untitled Listing'}</h3>
-                                        <div className="grid grid-cols-2 gap-3 text-sm">
-                                            <div><span className="text-navy-400">Industry:</span> <span className="font-medium text-navy-700">{formData.industry || '—'}</span></div>
-                                            <div><span className="text-navy-400">Region:</span> <span className="font-medium text-navy-700">{formData.region || '—'}</span></div>
-                                            <div><span className="text-navy-400">Revenue:</span> <span className="font-medium text-navy-700">{formData.revenue ? `€${Number(formData.revenue).toLocaleString()}` : '—'}</span></div>
-                                            <div><span className="text-navy-400">EBITDA:</span> <span className="font-medium text-navy-700">{formData.ebitda ? `€${Number(formData.ebitda).toLocaleString()}` : '—'}</span></div>
-                                            <div><span className="text-navy-400">Asking Price:</span> <span className="font-medium text-navy-700">{formData.asking_price ? `€${Number(formData.asking_price).toLocaleString()}` : '—'}</span></div>
-                                            <div><span className="text-navy-400">Employees:</span> <span className="font-medium text-navy-700">{formData.employee_count || '—'}</span></div>
-                                        </div>
-                                        {formData.description && <p className="text-sm text-navy-500">{formData.description}</p>}
-                                    </div>
-                                    <p className="text-xs text-navy-400 text-center">This listing will be saved as a draft. A broker will review it before publishing.</p>
+                                    <p className="text-xs text-navy-400 text-center">Nacrt neće biti javno prikazan bez pregleda i odobrenja.</p>
                                 </div>
                             )}
 
                             {step === 5 && (
                                 <div className="text-center py-8">
-                                    <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-4">
+                                    <div className="w-16 h-16 rounded-lg bg-green-100 flex items-center justify-center mx-auto mb-4">
                                         <CheckCircle2 className="w-8 h-8 text-green-600" />
                                     </div>
-                                    <h2 className="text-2xl font-bold text-navy-950 mb-2">Ready to Submit</h2>
-                                    <p className="text-navy-500 mb-6">Your listing will be saved as a draft and reviewed by our team before going live.</p>
+                                    <h2 className="text-2xl font-bold text-navy-950 mb-2">Spremno za predaju</h2>
+                                    <p className="text-navy-500 mb-7 font-sans">Profil se sprema kao nacrt i ide na savjetnički pregled prije objave.</p>
                                     <button
                                         onClick={handleSubmit}
                                         disabled={loading}
-                                        className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl gradient-gold text-navy-950 font-bold text-lg shadow-xl hover:shadow-2xl transition-all disabled:opacity-50"
+                                        className="inline-flex items-center gap-2 px-8 py-4 rounded-lg gradient-gold text-navy-950 font-bold text-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
                                     >
                                         {loading ? (
                                             <div className="w-5 h-5 border-2 border-navy-950/30 border-t-navy-950 rounded-full animate-spin" />
                                         ) : (
                                             <>
                                                 <Sparkles className="w-5 h-5" />
-                                                Submit Listing
+                                                Predaj nacrt
                                             </>
                                         )}
                                     </button>
@@ -293,27 +227,100 @@ export default function OnboardPage() {
                             )}
                         </div>
 
-                        {/* Navigation */}
                         {step < 5 && (
                             <div className="flex items-center justify-between mt-6">
                                 <button
-                                    onClick={() => setStep((s) => Math.max(1, s - 1) as Step)}
+                                    onClick={() => setStep((current) => Math.max(1, current - 1) as Step)}
                                     disabled={step === 1}
-                                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-navy-600 hover:bg-white transition-all disabled:opacity-30"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold text-navy-600 hover:bg-white transition-all disabled:opacity-30"
                                 >
-                                    <ChevronLeft className="w-4 h-4" /> Back
+                                    <ChevronLeft className="w-4 h-4" /> Natrag
                                 </button>
                                 <button
-                                    onClick={() => setStep((s) => Math.min(5, s + 1) as Step)}
-                                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl gradient-accent text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all"
+                                    onClick={() => setStep((current) => Math.min(5, current + 1) as Step)}
+                                    disabled={!canProceed()}
+                                    className="flex items-center gap-2 px-6 py-2.5 rounded-lg gradient-accent text-white font-bold text-sm shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
                                 >
-                                    Continue <ChevronRight className="w-4 h-4" />
+                                    Nastavi <ChevronRight className="w-4 h-4" />
                                 </button>
                             </div>
                         )}
                     </motion.div>
                 </AnimatePresence>
             </div>
+        </div>
+    )
+}
+
+function StepHeading({ icon: Icon, title }: { icon: ElementType; title: string }) {
+    return (
+        <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-lg bg-gold-100 flex items-center justify-center">
+                <Icon className="w-5 h-5 text-gold-700" />
+            </div>
+            <h2 className="text-xl font-bold text-navy-950">{title}</h2>
+        </div>
+    )
+}
+
+function TextInput({ label, value, onChange, placeholder, type = 'text' }: {
+    label: string
+    value: string
+    onChange: (value: string) => void
+    placeholder: string
+    type?: string
+}) {
+    return (
+        <div>
+            <label className="block text-sm font-bold text-navy-700 mb-1.5">{label}</label>
+            <input type={type} value={value} onChange={(event) => onChange(event.target.value)} className="field-shell" placeholder={placeholder} />
+        </div>
+    )
+}
+
+function SelectInput({ label, value, onChange, placeholder, options }: {
+    label: string
+    value: string
+    onChange: (value: string) => void
+    placeholder: string
+    options: readonly string[]
+}) {
+    return (
+        <div>
+            <label className="block text-sm font-bold text-navy-700 mb-1.5">{label}</label>
+            <select value={value} onChange={(event) => onChange(event.target.value)} className="field-shell">
+                <option value="">{placeholder}</option>
+                {options.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                ))}
+            </select>
+        </div>
+    )
+}
+
+function RangeInput({ label, value, onChange, desc }: {
+    label: string
+    value: number
+    onChange: (value: number) => void
+    desc: string
+}) {
+    return (
+        <div>
+            <div className="flex justify-between mb-1.5">
+                <label className="text-sm font-bold text-navy-700">{label}</label>
+                <span className="text-sm font-bold text-gold-700">{value}/10</span>
+            </div>
+            <input type="range" min="1" max="10" value={value} onChange={(event) => onChange(parseInt(event.target.value))} className="w-full accent-gold-600" />
+            <p className="text-xs text-navy-400 mt-1">{desc}</p>
+        </div>
+    )
+}
+
+function PreviewItem({ label, value }: { label: string; value: string }) {
+    return (
+        <div>
+            <span className="text-navy-400">{label}:</span>{' '}
+            <span className="font-bold text-navy-700">{value}</span>
         </div>
     )
 }

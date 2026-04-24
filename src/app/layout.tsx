@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import { DM_Sans, JetBrains_Mono, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin', 'latin-ext'],
@@ -28,31 +28,29 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Heritance — Where Businesses Find Their Next Chapter',
+    default: 'Heritance - diskretna kupoprodaja tvrtki',
     template: '%s | Heritance',
   },
   description:
-    'AI-powered business valuations, confidential deal rooms, and expert M&A brokerage for micro and small businesses in Croatia. Get your free valuation in 5 minutes.',
+    'Diskretne procjene vrijednosti, povjerljive sobe za transakcije i savjetovanje pri kupoprodaji malih i srednjih tvrtki u Hrvatskoj.',
   keywords: [
-    'M&A Croatia',
-    'business for sale Croatia',
-    'sell my business Croatia',
-    'buy a business Croatia',
-    'business valuation',
-    'mergers and acquisitions',
-    'Heritance',
+    'M&A Hrvatska',
+    'prodaja tvrtke',
+    'kupnja tvrtke',
+    'procjena vrijednosti poduzeća',
+    'poslovna sukcesija',
     'business broker Croatia',
-    'business succession Croatia',
-    'poduzetnička sukcesija',
+    'Heritance',
   ],
   authors: [{ name: 'Heritance' }],
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'hr_HR',
     url: 'https://heritance.hr',
     siteName: 'Heritance',
-    title: 'Heritance — Where Businesses Find Their Next Chapter',
-    description: 'AI-powered M&A advisory platform for Croatian businesses.',
+    title: 'Heritance - diskretna kupoprodaja tvrtki',
+    description:
+      'Premium M&A savjetovanje i digitalna platforma za hrvatske vlasnike, kupce i investitore.',
   },
 }
 
@@ -63,12 +61,12 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="hr"
       className={cn(
         playfairDisplay.variable,
         dmSans.variable,
         jetbrainsMono.variable,
-        "font-sans antialiased"
+        'font-sans antialiased'
       )}
     >
       <body className="min-h-screen flex flex-col bg-background text-foreground">

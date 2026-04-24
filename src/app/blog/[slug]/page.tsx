@@ -1,53 +1,44 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
-// Placeholder — will be SSR from Supabase blog_posts table
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params
+    const title = slug
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+
     return (
-        <div className="min-h-screen bg-[var(--background)] pt-24">
+        <div className="min-h-screen bg-background pt-24">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <Link
-                    href="/blog"
-                    className="inline-flex items-center gap-2 text-[var(--muted-foreground)] text-sm mb-8 hover:text-navy-950 transition-colors font-sans"
-                >
+                <Link href="/blog" className="inline-flex items-center gap-2 text-muted-foreground text-sm mb-8 hover:text-navy-950 transition-colors font-bold">
                     <ArrowLeft className="w-4 h-4" />
-                    Back to Blog
+                    Povratak na bilješke
                 </Link>
 
-                <article className="bg-white rounded-[8px] shadow-card border border-[var(--border)] p-8 md:p-12">
+                <article className="premium-card p-8 md:p-12">
                     <div className="text-center mb-8">
-                        <div className="flex items-center justify-center gap-3 text-xs text-[var(--muted-foreground)] mb-4 font-sans">
-                            <span>Heritance Team</span>
-                            <span>·</span>
-                            <span>8 min read</span>
+                        <div className="flex items-center justify-center gap-3 text-xs text-muted-foreground mb-4 font-sans">
+                            <span>Heritance tim</span>
+                            <span>/</span>
+                            <span>8 min</span>
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-bold text-navy-950 mb-4">
-                            {params.slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
-                        </h1>
-                        <p className="text-[var(--muted-foreground)] max-w-xl mx-auto font-sans">
-                            This article is coming soon. Check back for expert insights on M&A, valuations, and succession planning in Croatia.
+                        <h1 className="text-3xl md:text-4xl font-bold text-navy-950 mb-4">{title}</h1>
+                        <p className="text-muted-foreground max-w-xl mx-auto font-sans">
+                            Ovaj vodič uskoro stiže. Do tada možete istražiti procjenu vrijednosti ili zatražiti povjerljiv razgovor.
                         </p>
                     </div>
 
-                    <div className="prose prose-navy max-w-none font-sans">
-                        <p className="text-[var(--muted-foreground)] leading-relaxed">
-                            Content for this blog post will be loaded from the Heritance database once the blog_posts table is populated.
-                            In the meantime, explore our other resources:
-                        </p>
+                    <div className="text-muted-foreground leading-relaxed font-sans">
+                        Sadržaj će se učitavati iz Heritance baze znanja nakon povezivanja blog modula.
                     </div>
 
-                    <div className="mt-8 pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row gap-4">
-                        <Link
-                            href="/valuate"
-                            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg gradient-gold text-navy-950 font-semibold text-sm font-sans shadow-sm hover:shadow-md transition-all"
-                        >
-                            Get Free Valuation
+                    <div className="mt-8 pt-8 border-t border-border flex flex-col sm:flex-row gap-4">
+                        <Link href="/valuate" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg gradient-gold text-navy-950 font-bold text-sm font-sans shadow-sm hover:shadow-md transition-all">
+                            Procjena vrijednosti
                         </Link>
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-[var(--border)] text-navy-700 font-semibold text-sm font-sans hover:bg-navy-50 transition-all"
-                        >
-                            Contact an Advisor
+                        <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-border text-navy-700 font-bold text-sm font-sans hover:bg-navy-50 transition-all">
+                            Kontakt savjetnika
                         </Link>
                     </div>
                 </article>

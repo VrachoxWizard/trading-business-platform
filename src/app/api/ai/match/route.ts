@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
-export async function POST(req: NextRequest) {
+export async function POST() {
     try {
         const supabase = await createClient()
         const { data: { user } } = await supabase.auth.getUser()
@@ -35,13 +35,13 @@ export async function POST(req: NextRequest) {
         const matches = listings
             .map((listing) => {
                 let score = 0
-                let reasons: string[] = []
+                const reasons: string[] = []
 
                 // EV fit (30%)
                 if (buyerProfile.min_ev && buyerProfile.max_ev && listing.asking_price) {
                     if (listing.asking_price >= buyerProfile.min_ev && listing.asking_price <= buyerProfile.max_ev) {
                         score += 30
-                        reasons.push('Enterprise value is within your target range')
+                        reasons.push('vrijednost je unutar ciljanog raspona')
                     } else {
                         const distance = listing.asking_price < buyerProfile.min_ev
                             ? (buyerProfile.min_ev - listing.asking_price) / buyerProfile.min_ev
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
                 if (buyerProfile.target_industries?.length > 0) {
                     if (buyerProfile.target_industries.includes(listing.industry)) {
                         score += 25
-                        reasons.push(`Matches your target sector: ${listing.industry}`)
+                        reasons.push(`industrija odgovara profilu: ${listing.industry}`)
                     }
                 } else {
                     score += 12.5
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
                 if (buyerProfile.target_regions?.length > 0) {
                     if (buyerProfile.target_regions.includes(listing.region)) {
                         score += 20
-                        reasons.push(`Located in your preferred region: ${listing.region}`)
+                        reasons.push(`regija odgovara profilu: ${listing.region}`)
                     }
                 } else {
                     score += 10
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
                 if (buyerProfile.min_ebitda && buyerProfile.max_ebitda && listing.ebitda) {
                     if (listing.ebitda >= buyerProfile.min_ebitda && listing.ebitda <= buyerProfile.max_ebitda) {
                         score += 25
-                        reasons.push('EBITDA is within your target range')
+                        reasons.push('EBITDA je unutar ciljanog raspona')
                     } else {
                         const distance = listing.ebitda < buyerProfile.min_ebitda
                             ? (buyerProfile.min_ebitda - listing.ebitda) / buyerProfile.min_ebitda
@@ -89,8 +89,8 @@ export async function POST(req: NextRequest) {
 
                 const roundedScore = Math.round(score)
                 const narrative = reasons.length > 0
-                    ? `This ${listing.industry} opportunity scores ${roundedScore}% based on your criteria. ${reasons.join('. ')}.`
-                    : `This ${listing.industry} opportunity in ${listing.region} has a ${roundedScore}% match score.`
+                    ? `Prilika u industriji ${listing.industry} ima ${roundedScore}% podudaranja prema vašim kriterijima: ${reasons.join(', ')}.`
+                    : `Prilika u industriji ${listing.industry} i regiji ${listing.region} ima ${roundedScore}% podudaranja.`
 
                 return {
                     listing_id: listing.id,

@@ -2,8 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import ListingsClient from './ListingsClient'
 
 export const metadata = {
-    title: 'Deal Flow — Browse Businesses for Sale',
-    description: 'Explore curated M&A opportunities in Croatia. Filter by industry, region, enterprise value, and more. All listings are pre-screened and confidential.',
+    title: 'Tržnica prilika',
+    description: 'Pregled povjerljivih M&A prilika u Hrvatskoj s anonimnim profilima, osnovnim metrikama i NDA pristupom.',
 }
 
 export default async function ListingsPage() {

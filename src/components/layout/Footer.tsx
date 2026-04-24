@@ -2,81 +2,77 @@ import Link from 'next/link'
 import { Mail, MapPin, Phone } from 'lucide-react'
 
 const footerLinks = {
-    Platform: [
-        { label: 'Marketplace', href: '/listings' },
-        { label: 'Free Valuation', href: '/valuate' },
-        { label: 'Sell a Business', href: '/sell' },
-        { label: 'Buy a Business', href: '/buy' },
+    Platforma: [
+        { label: 'Tržnica prilika', href: '/listings' },
+        { label: 'Procjena vrijednosti', href: '/valuate' },
+        { label: 'Prodaja tvrtke', href: '/sell' },
+        { label: 'Kupnja tvrtke', href: '/buy' },
     ],
-    Company: [
-        { label: 'About Heritance', href: '#' },
-        { label: 'Succession Planning', href: '/succession' },
+    Savjetovanje: [
+        { label: 'Sukcesija', href: '/succession' },
         { label: 'Blog', href: '/blog' },
-        { label: 'Contact', href: '/contact' },
+        { label: 'Kontakt', href: '/contact' },
+        { label: 'Za partnere', href: '/contact' },
     ],
-    Legal: [
-        { label: 'Privacy Policy', href: '#' },
-        { label: 'Terms of Service', href: '#' },
-        { label: 'NDA Policy', href: '#' },
-        { label: 'GDPR', href: '#' },
+    Povjerenje: [
+        { label: 'Povjerljivost', href: '#' },
+        { label: 'NDA proces', href: '#' },
+        { label: 'Uvjeti korištenja', href: '#' },
+        { label: 'Privatnost i GDPR', href: '#' },
     ],
 }
 
 export default function Footer() {
     return (
         <footer className="bg-navy-950 text-white">
-            {/* CTA Strip */}
             <div className="border-b border-white/10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div>
-                            <h3 className="text-2xl font-display font-bold mb-2">
-                                Ready to write the next chapter?
+                <div className="section-shell py-12">
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div className="max-w-2xl">
+                            <p className="text-xs font-bold uppercase tracking-wider text-gold-400 mb-3">Diskretno. Strukturirano. Savjetovano.</p>
+                            <h3 className="text-2xl md:text-3xl font-display font-bold mb-2">
+                                Razgovarajmo prije nego tržište sazna.
                             </h3>
                             <p className="text-navy-300 font-sans">
-                                Whether buying or selling, Heritance guides you through every step.
+                                Vlasnicima, kupcima i investitorima pomažemo procijeniti opcije bez nepotrebnog izlaganja.
                             </p>
                         </div>
-                        <div className="flex gap-3">
+                        <div className="flex flex-col sm:flex-row gap-3">
                             <Link
                                 href="/valuate"
-                                className="px-6 py-3 rounded-lg gradient-gold text-navy-950 font-semibold text-sm hover:shadow-md transition-all hover:scale-[1.02]"
+                                className="px-6 py-3 rounded-lg gradient-gold text-navy-950 font-bold text-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
                             >
-                                Free Valuation →
+                                Procijenite tvrtku
                             </Link>
                             <Link
-                                href="/listings"
-                                className="px-6 py-3 rounded-lg border border-white/20 text-white font-semibold text-sm hover:bg-white/10 transition-all"
+                                href="/contact"
+                                className="px-6 py-3 rounded-lg border border-white/20 text-white font-bold text-sm hover:bg-white/10 transition-all"
                             >
-                                Browse Listings
+                                Zatražite razgovor
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Main Footer */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div className="section-shell py-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-                    {/* Brand column */}
                     <div className="lg:col-span-2">
                         <Link href="/" className="flex items-center gap-2.5 mb-6">
-                            <div className="w-9 h-9 rounded-lg bg-gold-600 flex items-center justify-center">
-                                <span className="text-white font-display font-bold text-lg leading-none">H</span>
+                            <div className="w-9 h-9 rounded-lg gradient-gold flex items-center justify-center">
+                                <span className="text-navy-950 font-display font-bold text-lg leading-none">H</span>
                             </div>
                             <span className="text-xl font-display font-bold">
                                 Herit<span className="text-gold-400">ance</span>
                             </span>
                         </Link>
                         <p className="text-navy-300 text-sm leading-relaxed mb-6 max-w-sm font-sans">
-                            Where businesses find their next chapter. AI-powered valuations,
-                            confidential deal rooms, and expert M&A brokerage for micro and
-                            small businesses in Croatia and the wider region.
+                            Premium platforma za procjene vrijednosti, povjerljive transakcije i savjetovanje pri kupoprodaji tvrtki u Hrvatskoj i regiji.
                         </p>
                         <div className="space-y-3 text-sm text-navy-400 font-sans">
                             <div className="flex items-center gap-2">
                                 <MapPin className="w-4 h-4" />
-                                <span>Zagreb, Croatia</span>
+                                <span>Zagreb, Hrvatska</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Mail className="w-4 h-4" />
@@ -93,10 +89,9 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Link columns */}
                     {Object.entries(footerLinks).map(([title, links]) => (
                         <div key={title}>
-                            <h4 className="text-sm font-semibold uppercase tracking-wider text-navy-400 mb-4 font-sans">
+                            <h4 className="text-sm font-bold uppercase tracking-wider text-navy-400 mb-4 font-sans">
                                 {title}
                             </h4>
                             <ul className="space-y-3">
@@ -116,14 +111,11 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* Bottom bar */}
             <div className="border-t border-white/10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div className="section-shell py-6">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-navy-400 font-sans">
-                        <p>© {new Date().getFullYear()} Heritance. All rights reserved.</p>
-                        <p>
-                            Where businesses find their next chapter.
-                        </p>
+                        <p>© {new Date().getFullYear()} Heritance. Sva prava pridržana.</p>
+                        <p>Diskretna kupoprodaja tvrtki uz savjetničku podršku.</p>
                     </div>
                 </div>
             </div>
