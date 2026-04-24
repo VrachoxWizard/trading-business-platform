@@ -20,6 +20,8 @@ import CroatiaDealNetwork from '@/components/CroatiaDealNetwork'
 import DealMarquee from '@/components/DealMarquee'
 import ProcessTimeline from '@/components/ProcessTimeline'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
+import Hero3DScene from '@/components/ui/Hero3DScene'
+import { FadeInStaggerContainer, FadeInItem } from '@/components/ui/FadeInStagger'
 
 const trustMetrics = [
   { value: '€850K-€12M', label: 'raspon aktivnih prilika' },
@@ -105,38 +107,35 @@ export default function HomePage() {
     <>
       <section className="relative flex min-h-[88svh] items-center overflow-hidden bg-navy-950 pb-16 pt-28 text-white sm:pb-20 lg:pt-32">
         <div className="absolute inset-0">
-          <Image
-            src="/images/hero_croatian_owner.png"
-            alt="Vlasnik hrvatske tvrtke u proizvodnom prostoru"
-            fill
-            priority
-            className="object-cover object-center lg:object-[63%_50%]"
-            sizes="100vw"
-            quality={92}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/92 to-navy-950/32" />
-          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-navy-950 to-transparent" />
+          <Hero3DScene />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy-950 via-navy-950/80 to-transparent pointer-events-none" />
         </div>
 
-        <div className="section-shell relative z-10 grid items-center gap-12 lg:grid-cols-[1.02fr_0.78fr]">
-          <div className="max-w-3xl">
-            <span className="mb-6 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[0.68rem] font-bold uppercase leading-tight tracking-wider text-white backdrop-blur-md sm:text-xs">
-              <span className="h-1.5 w-1.5 rounded-full bg-trust-400" />
-              Povjerljivo tržište za akvizicije u Hrvatskoj
-            </span>
+        <FadeInStaggerContainer delay={0.2} className="section-shell relative z-10 grid items-center gap-12 lg:grid-cols-[1.02fr_0.78fr] pointer-events-none">
+          <div className="max-w-3xl pointer-events-auto">
+            <FadeInItem>
+              <span className="mb-6 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[0.68rem] font-bold uppercase leading-tight tracking-wider text-white backdrop-blur-md sm:text-xs">
+                <span className="h-1.5 w-1.5 rounded-full bg-trust-400" />
+                Povjerljivo tržište za akvizicije u Hrvatskoj
+              </span>
+            </FadeInItem>
 
-            <h1 className="mb-6 max-w-4xl text-[2.2rem] leading-[1.04] text-white sm:text-[3.5rem] lg:text-[4.75rem]">
-              <span className="block">Kupnja i prodaja</span>
-              <span className="block">tvrtki, bez gubitka</span>
-              <span className="block">povjerenja.</span>
-            </h1>
+            <FadeInItem>
+              <h1 className="mb-6 max-w-4xl text-[2.2rem] leading-[1.04] text-white sm:text-[3.5rem] lg:text-[4.75rem]">
+                <span className="block">Kupnja i prodaja</span>
+                <span className="block">tvrtki, bez gubitka</span>
+                <span className="block">povjerenja.</span>
+              </h1>
+            </FadeInItem>
 
-            <p className="mb-9 max-w-2xl text-base leading-relaxed text-navy-100 sm:text-lg lg:text-xl">
-              Heritance povezuje vlasnike, kupce i savjetnike kroz siguran M&A proces:
-              AI procjenu vrijednosti, anoniman teaser, NDA pristup i provjereno uparivanje.
-            </p>
+            <FadeInItem>
+              <p className="mb-9 max-w-2xl text-base leading-relaxed text-navy-100 sm:text-lg lg:text-xl drop-shadow-md">
+                Heritance povezuje vlasnike, kupce i savjetnike kroz siguran M&A proces:
+                AI procjenu vrijednosti, anoniman teaser, NDA pristup i provjereno uparivanje.
+              </p>
+            </FadeInItem>
 
-            <div className="mb-9 flex flex-col gap-4 sm:flex-row">
+            <FadeInItem className="mb-9 flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/valuate"
                 className="cta-primary cta-primary-gold min-h-12 w-full px-8 text-base hover:-translate-y-0.5 hover:shadow-xl sm:w-auto"
@@ -151,9 +150,9 @@ export default function HomePage() {
                 Pregledajte prilike
                 <ArrowRight className="h-5 w-5" />
               </Link>
-            </div>
+            </FadeInItem>
 
-            <div className="grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
+            <FadeInItem className="grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
               {trustMetrics.map((metric) => (
                 <div
                   key={metric.label}
@@ -165,52 +164,54 @@ export default function HomePage() {
                   </p>
                 </div>
               ))}
-            </div>
+            </FadeInItem>
           </div>
 
-          <aside className="premium-panel hidden p-6 lg:block">
-            <div className="mb-6 flex items-center justify-between gap-4 border-b border-white/10 pb-5">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-gold-400">
-                  Deal room status
-                </p>
-                <h2 className="mt-2 text-2xl font-bold text-white">Kontrolirani pristup</h2>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-trust-400/15 text-trust-300">
-                <LockKeyhole className="h-6 w-6" />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                ['AI valuation', 'Raspon spreman za vlasnika', 'Dovršeno'],
-                ['Blind teaser', 'Identitet skriven do odobrenja', 'U izradi'],
-                ['Buyer review', 'Provjera teze i kapaciteta', 'Sljedeće'],
-              ].map(([title, desc, status]) => (
-                <div
-                  key={title}
-                  className="rounded-xl border border-white/10 bg-white/[0.06] p-4"
-                >
-                  <div className="mb-2 flex items-center justify-between gap-3">
-                    <p className="font-bold text-white">{title}</p>
-                    <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs font-bold text-gold-300">
-                      {status}
-                    </span>
-                  </div>
-                  <p className="text-sm text-navy-300">{desc}</p>
+          <FadeInItem className="pointer-events-auto">
+            <aside className="premium-panel hidden p-6 lg:block">
+              <div className="mb-6 flex items-center justify-between gap-4 border-b border-white/10 pb-5">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-gold-400">
+                    Deal room status
+                  </p>
+                  <h2 className="mt-2 text-2xl font-bold text-white">Kontrolirani pristup</h2>
                 </div>
-              ))}
-            </div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-trust-400/15 text-trust-300">
+                  <LockKeyhole className="h-6 w-6" />
+                </div>
+              </div>
 
-            <Link
-              href="/login"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/[0.16]"
-            >
-              Prijavite se u platformu
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </aside>
-        </div>
+              <div className="space-y-4">
+                {[
+                  ['AI valuation', 'Raspon spreman za vlasnika', 'Dovršeno'],
+                  ['Blind teaser', 'Identitet skriven do odobrenja', 'U izradi'],
+                  ['Buyer review', 'Provjera teze i kapaciteta', 'Sljedeće'],
+                ].map(([title, desc, status]) => (
+                  <div
+                    key={title}
+                    className="rounded-xl border border-white/10 bg-white/[0.06] p-4"
+                  >
+                    <div className="mb-2 flex items-center justify-between gap-3">
+                      <p className="font-bold text-white">{title}</p>
+                      <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs font-bold text-gold-300">
+                        {status}
+                      </span>
+                    </div>
+                    <p className="text-sm text-navy-300">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href="/login"
+                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/[0.16]"
+              >
+                Prijavite se u platformu
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </aside>
+          </FadeInItem>
+        </FadeInStaggerContainer>
       </section>
 
       <section className="border-y border-navy-100 bg-white py-8">
@@ -242,30 +243,31 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <FadeInStaggerContainer className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {personaCards.map((persona) => {
               const Icon = persona.icon
               return (
-                <Link
-                  key={persona.title}
-                  href={persona.href}
-                  className="premium-card group p-7 card-interactive hover:shadow-elevated"
-                >
-                  <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-finance-100 text-finance-700">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mb-3 text-xl font-bold text-navy-950">{persona.title}</h3>
-                  <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-                    {persona.desc}
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-sm font-bold text-finance-700 transition-all group-hover:gap-3">
-                    {persona.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </Link>
+                <FadeInItem key={persona.title}>
+                  <Link
+                    href={persona.href}
+                    className="premium-card group p-7 card-interactive hover:shadow-elevated block h-full"
+                  >
+                    <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-finance-100 text-finance-700">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mb-3 text-xl font-bold text-navy-950">{persona.title}</h3>
+                    <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+                      {persona.desc}
+                    </p>
+                    <span className="inline-flex items-center gap-2 text-sm font-bold text-finance-700 transition-all group-hover:gap-3">
+                      {persona.cta}
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </Link>
+                </FadeInItem>
               )
             })}
-          </div>
+          </FadeInStaggerContainer>
         </div>
       </section>
 
@@ -299,20 +301,20 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <FadeInStaggerContainer className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {platformPillars.map((feature) => {
               const Icon = feature.icon
               return (
-                <div key={feature.title} className="premium-card p-6">
+                <FadeInItem key={feature.title} className="premium-card p-6">
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-trust-100 text-trust-700">
                     <Icon className="h-5 w-5" />
                   </div>
                   <h3 className="mb-2 text-lg font-bold text-navy-950">{feature.title}</h3>
                   <p className="text-sm leading-relaxed text-navy-600">{feature.desc}</p>
-                </div>
+                </FadeInItem>
               )
             })}
-          </div>
+          </FadeInStaggerContainer>
         </div>
       </section>
 

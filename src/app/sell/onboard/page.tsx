@@ -259,7 +259,7 @@ export default function OnboardPage() {
     )
 }
 
-function StepHeading({ icon: Icon, title }: { icon: ElementType; title: string }) {
+function StepHeading({ icon: Icon, title }: { icon: any; title: string }) {
     return (
         <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 rounded-lg bg-gold-100 flex items-center justify-center">
