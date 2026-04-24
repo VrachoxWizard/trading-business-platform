@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import ProcessTimeline from '@/components/ProcessTimeline'
+import TestimonialCarousel from '@/components/TestimonialCarousel'
 import {
   TrendingUp,
   Shield,
@@ -201,20 +202,21 @@ export default function HomePage() {
       </section>
 
       {/* PERSONA SELECTORS */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-32 bg-white relative overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-navy-200 to-transparent" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={stagger}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold text-navy-950 mb-4">
-              Who are you?
+            <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-bold text-navy-950 mb-6 tracking-tight">
+              A Platform Built for You
             </motion.h2>
-            <motion.p variants={fadeIn} className="text-navy-500 text-lg max-w-2xl mx-auto">
-              DealFlow serves every stakeholder in the M&A process with tailored tools and experiences.
+            <motion.p variants={fadeIn} className="text-navy-500 text-lg md:text-xl max-w-2xl mx-auto">
+              DealFlow serves every stakeholder in the M&A process with tailored tools and elite experiences.
             </motion.p>
           </motion.div>
 
@@ -225,26 +227,42 @@ export default function HomePage() {
             variants={stagger}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            {personas.map((p) => {
+            {personas.map((p, i) => {
               const Icon = p.icon
+              const isCenter = i === 1
               return (
                 <motion.div
                   key={p.title}
                   variants={fadeIn}
-                  className="group relative bg-white rounded-2xl p-8 shadow-card hover:shadow-elevated transition-all duration-300 border border-navy-100 hover:border-accent-200 cursor-pointer"
+                  className={`group relative rounded-3xl p-8 sm:p-10 transition-all duration-500 hover:-translate-y-2 overflow-hidden ${isCenter
+                      ? 'bg-navy-950 text-white shadow-2xl ring-1 ring-white/10'
+                      : 'bg-white text-navy-950 shadow-card border border-navy-100 hover:shadow-elevated hover:border-accent-200'
+                    }`}
                 >
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${p.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
-                    <Icon className="w-7 h-7 text-white" />
+                  {/* Subtle hover gradient background */}
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${isCenter ? 'from-accent-500/10 to-transparent' : 'from-accent-50/50 to-transparent'
+                    }`} />
+
+                  <div className="relative z-10">
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform duration-500 group-hover:scale-110 shadow-lg ${isCenter ? 'bg-gradient-to-br from-accent-500 to-accent-600' : 'bg-gradient-to-br ' + p.color
+                      }`}>
+                      <Icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4">{p.title}</h3>
+                    <p className={`mb-8 leading-relaxed text-lg ${isCenter ? 'text-navy-300' : 'text-navy-500'
+                      }`}>{p.desc}</p>
+
+                    <Link
+                      href={p.href}
+                      className={`inline-flex items-center justify-between w-full p-4 rounded-xl font-bold text-sm transition-all duration-300 ${isCenter
+                          ? 'bg-white/5 hover:bg-white/10 text-white'
+                          : 'bg-navy-50 hover:bg-accent-50 text-accent-700 hover:text-accent-800'
+                        }`}
+                    >
+                      {p.cta}
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
-                  <h3 className="text-xl font-bold text-navy-950 mb-3">{p.title}</h3>
-                  <p className="text-navy-500 mb-6 leading-relaxed">{p.desc}</p>
-                  <Link
-                    href={p.href}
-                    className="inline-flex items-center gap-2 text-accent-600 font-semibold text-sm group-hover:gap-3 transition-all"
-                  >
-                    {p.cta}
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
                 </motion.div>
               )
             })}
@@ -252,21 +270,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURES GRID */}
-      <section className="py-24 bg-navy-50">
+      {/* FEATURES GRID - Bento Box */}
+      <section className="py-32 bg-navy-50 border-t border-navy-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={stagger}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold text-navy-950 mb-4">
-              Why DealFlow?
+            <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-bold text-navy-950 mb-6 tracking-tight">
+              Engineered for Alpha
             </motion.h2>
-            <motion.p variants={fadeIn} className="text-navy-500 text-lg max-w-2xl mx-auto">
-              We combine AI technology with human expertise to deliver the most efficient M&A experience in the region.
+            <motion.p variants={fadeIn} className="text-navy-500 text-lg md:text-xl max-w-2xl mx-auto">
+              We combine proprietary AI technology with human brokerage expertise to deliver the most efficient transaction experience.
             </motion.p>
           </motion.div>
 
@@ -275,21 +293,48 @@ export default function HomePage() {
             whileInView="animate"
             viewport={{ once: true }}
             variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[240px]"
           >
-            {features.map((f) => {
+            {features.map((f, i) => {
               const Icon = f.icon
+
+              // Define bento grid layout classes
+              const bentoClasses = [
+                "md:col-span-2 md:row-span-2 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 text-white shadow-2xl relative overflow-hidden",
+                "md:col-span-1 md:row-span-1 bg-white border border-navy-100 shadow-sm",
+                "md:col-span-1 md:row-span-2 bg-gradient-to-b from-white to-navy-50/50 border border-navy-100 shadow-sm",
+                "md:col-span-1 md:row-span-1 bg-white border border-navy-100 shadow-sm",
+                "md:col-span-2 md:row-span-1 bg-white border border-navy-100 shadow-sm",
+                "md:col-span-2 md:row-span-1 bg-gradient-to-br from-accent-600 to-accent-700 text-white shadow-lg overflow-hidden relative",
+              ]
+
+              const isDark = i === 0 || i === 5
+
               return (
                 <motion.div
                   key={f.title}
                   variants={fadeIn}
-                  className="bg-white rounded-2xl p-8 shadow-card hover:shadow-elevated transition-all duration-300 border border-navy-100"
+                  className={`rounded-3xl p-8 hover:-translate-y-1 transition-transform duration-300 flex flex-col justify-between ${bentoClasses[i]}`}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-accent-100 flex items-center justify-center mb-5">
-                    <Icon className="w-6 h-6 text-accent-600" />
+                  {/* Decorative background accents for dark cards */}
+                  {i === 0 && <div className="absolute top-0 right-0 w-64 h-64 bg-accent-500/20 blur-3xl rounded-full" />}
+                  {i === 5 && <div className="absolute bottom-[-10%] right-[-10%] w-40 h-40 bg-gold-400/30 blur-2xl rounded-full" />}
+
+                  <div className="relative z-10">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm ${isDark ? 'bg-white/10 border border-white/20' : 'bg-navy-50'
+                      }`}>
+                      <Icon className={`w-7 h-7 ${isDark ? 'text-white' : 'text-accent-600'}`} />
+                    </div>
+                    <h3 className={`text-2xl font-bold mb-3 ${isDark ? 'text-white' : 'text-navy-950'}`}>{f.title}</h3>
+                    <p className={`text-base leading-relaxed ${isDark ? 'text-navy-200' : 'text-navy-600'}`}>{f.desc}</p>
                   </div>
-                  <h3 className="text-lg font-bold text-navy-950 mb-2">{f.title}</h3>
-                  <p className="text-navy-500 text-sm leading-relaxed">{f.desc}</p>
+
+                  {/* Large cards get an extra CTA link at bottom */}
+                  {i === 0 && (
+                    <div className="mt-8 relative z-10 flex items-center text-accent-400 font-semibold cursor-pointer group">
+                      Try Valuator Tool <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  )}
                 </motion.div>
               )
             })}
@@ -335,7 +380,7 @@ export default function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-24 bg-navy-950">
+      <section className="py-32 bg-navy-950 relative border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="initial"
@@ -344,42 +389,15 @@ export default function HomePage() {
             variants={stagger}
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-bold text-white mb-6">
               Trusted by Business Owners
             </motion.h2>
-            <motion.p variants={fadeIn} className="text-navy-300 text-lg max-w-2xl mx-auto">
+            <motion.p variants={fadeIn} className="text-navy-300 text-lg md:text-xl max-w-2xl mx-auto">
               Real outcomes from real transactions guided by DealFlow.
             </motion.p>
           </motion.div>
 
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={stagger}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {testimonials.map((t) => (
-              <motion.div
-                key={t.name}
-                variants={fadeIn}
-                className="glass-dark rounded-2xl p-8"
-              >
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-gold-500 fill-gold-500" />
-                  ))}
-                </div>
-                <p className="text-white/90 mb-6 leading-relaxed italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div>
-                  <p className="text-white font-semibold">{t.name}</p>
-                  <p className="text-navy-400 text-sm">{t.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          <TestimonialCarousel />
         </div>
       </section>
 
